@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.trading.dao.CartItemDao">
+	<insert id="insertCartItem" useGeneratedKeys="true"
+		keyColumn="cartItem_id" keyProperty="cartItemId">
+		INSERT INTO cartitem(cartItem_product_id,cartItem_quantity)
+		VALUES(#{cartItemProduct.productId},#{cartItemQuantity})
+	</insert>
+	<update id="updateCartItem" parameterType="com.netease.trading.entity.CartItem">
+	update cartitem
+		<set>
+		<if test="cartItemProduct != null">cartItem_product_id=#{cartItemProduct.productId},</if>
+		<if test="cartItemQuantity != null">cartItem_quantity=#{cartItemQuantity}</if>
+		</set>
+		where cartItem_id=#{cartItemId}
+	</update>
+	<delete id="deleteCartItem">
+		DELETE FROM
+		cartitem
+		WHERE
+		cartItem_id =
+		#{cartItemId}
+	</delete>
+</mapper>

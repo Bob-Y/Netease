@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.trading.dao.OrderDao">
+	<insert id="insertOrder" useGeneratedKeys="true"
+		keyColumn="order_id" keyProperty="orderId">
+		INSERT INTO orderTable(order_time,order_product,order_quantity, order_price,order_user_id)
+		VALUES(#{orderTime},#{orderProduct.productId},#{orderQuantity},#{orderPrice},#{orderUser.userId})
+	</insert>
+	<update id="updateOrder" parameterType="com.netease.trading.entity.Order">
+	update orderTable
+		<set>
+		<if test="orderTime != null">order_time=#{orderTime},</if>
+		<if test="orderProduct != null">order_product=#{orderProduct.productId},</if>
+		<if test="orderQuantity != null">order_quantity=#{orderQuantity},</if>
+		<if test="orderPrice != null">order_price=#{orderPrice},</if>
+		<if test="orderUser != null">order_user_id=#{orderUser.userId}</if>  
+		</set>
+		where order_id=#{orderId}
+	</update>
+	<select id="queryUserOrder" resultType="com.netease.trading.entity.Order" parameterType="long">
+		SELECT order_id, order_time,
+		order_product, order_quantity,order_price,order_user_id
+		FROM orderTable WHERE order_user_id = #{userId}
+	</select>
+</mapper>
