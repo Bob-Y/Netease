@@ -24,9 +24,36 @@
 		</set>
 		where product_id=#{productId}
 	</update>
-		<select id="queryProduct" resultType="com.netease.trading.entity.Product">
+	<select id="queryProduct" resultType="com.netease.trading.entity.Product">
 		SELECT product_id, product_title,product_abstract,product_detail,
 		product_price,product_status,product_imgAddr,product_imgType,product_user_id
 		FROM product
 	</select>
+
+	<select id="findById" resultType="com.netease.trading.entity.Product">
+		SELECT product_id, product_title,product_abstract,product_detail,
+		product_price,product_status,product_imgAddr,product_imgType,product_user_id
+		FROM product
+		WHERE product_id = #{pid}
+	</select>
+
+	<select id="findBoughtById" resultType="com.netease.trading.entity.Product">>
+		SELECT p.product_id, p.product_title,p.product_abstract,p.product_detail,
+		o.order_price as product_price
+		FROM product p, `ordertable` o
+		WHERE p.product_id = o.order_product and p.product_id = #{pid}
+	</select>
+
+	<select id="queryUserProduct" resultType="com.netease.trading.dto.UserProduct" >
+		select p.*,
+		p.`product_id` in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = #{uid}) as hasBought
+		from product p
+	</select>
+
+	<select id="queryUnBought" resultType="Product">
+		select p.*
+		from product p
+		where p.`product_id` not in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = #{uid})
+	</select>
+
 </mapper>

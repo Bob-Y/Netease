@@ -1,6 +1,7 @@
-com\netease\trading\dao\OrderDaoTest.class
 com\netease\trading\service\ProductServiceTest.class
-com\netease\trading\service\UserServiceTest.class
-com\netease\trading\dao\ProductDaoTest.class
 com\netease\trading\dao\UserDaoTest.class
 com\netease\trading\BaseTest.class
+com\netease\trading\UtilTest.class
+com\netease\trading\dao\OrderDaoTest.class
+com\netease\trading\service\UserServiceTest.class
+com\netease\trading\dao\ProductDaoTest.class

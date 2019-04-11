@@ -11,3 +11,4 @@ function getQueryString(name) {
     }
     return '';
 }
+var baseUrl = '/trading/'
