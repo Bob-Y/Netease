@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.trading.dao.ProductDao">
+	<insert id="insertProduct" useGeneratedKeys="true"
+		keyColumn="product_id" keyProperty="productId">
+		INSERT INTO product(product_title,product_abstract,product_detail,
+		product_price,product_status,product_imgAddr,product_imgType,product_user_id)
+		VALUES(#{productTitle},#{productAbstract},#{productDetail},#{productPrice},#{productStatus},
+		#{productImgAddr},#{productImgType},#{productUser.userId})
+	</insert>
+	<update id="updateProduct" parameterType="com.netease.trading.entity.Product">
+	update product
+		<set>
+		<if test="productTitle != null">product_title=#{productTitle},</if>
+		<if test="productAbstract != null">product_abstract=#{productAbstract},</if>
+		<if test="productDetail != null">product_detail=#{productDetail},</if>
+		<if test="productPrice != null">product_price=#{productPrice},</if>
+		<if test="productStatus != null">product_status=#{productStatus},</if>  
+		<if test="productImgAddr != null">product_imgAddr=#{productImgAddr},</if>
+		<if test="productImgType != null">product_imgType=#{productImgType},</if>
+		<if test="productUser != null">product_user_id=#{productUser.userId}</if>
+		</set>
+		where product_id=#{productId}
+	</update>
+		<select id="queryProduct" resultType="com.netease.trading.entity.Product">
+		SELECT product_id, product_title,product_abstract,product_detail,
+		product_price,product_status,product_imgAddr,product_imgType,product_user_id
+		FROM product
+	</select>
+</mapper>
