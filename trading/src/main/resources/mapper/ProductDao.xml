@@ -56,4 +56,9 @@
 		where p.`product_id` not in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = #{uid})
 	</select>
 
+	<delete id="deleteProduct">
+		DELETE FROM product
+		WHERE product_id = #{pid}
+	</delete>
+
 </mapper>

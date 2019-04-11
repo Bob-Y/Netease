@@ -37,4 +37,6 @@ public interface ProductDao {
 
 	List<Product> queryUnBought(Integer uid);
 
+	int deleteProduct(Integer pid);
+
 }
