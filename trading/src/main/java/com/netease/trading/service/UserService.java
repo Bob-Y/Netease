@@ -6,4 +6,6 @@ public interface UserService {
 
     List<User> getUserList();
 
+    int validate(String username, String pass);
+
 }

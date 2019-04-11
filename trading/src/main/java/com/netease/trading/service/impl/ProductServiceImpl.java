@@ -2,6 +2,8 @@ package com.netease.trading.service.impl;
 
 import java.util.List;
 
+import com.netease.trading.dao.OrderDao;
+import com.netease.trading.dto.CartItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ import com.netease.trading.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
+
+	@Autowired
+	private OrderDao orderDao;
 
 	@Override
 	public ProductExecution getProductList() {
@@ -73,7 +78,15 @@ public class ProductServiceImpl implements ProductService {
 			return new ProductExecution(ProductStateEnum.EMPTY);
 		}
 	}
-	
+
+	@Override
+	public boolean addOrder(List<CartItemDto> cart) {
+		for(CartItemDto item: cart) {
+
+		}
+
+		return false;
+	}
 
 
 }

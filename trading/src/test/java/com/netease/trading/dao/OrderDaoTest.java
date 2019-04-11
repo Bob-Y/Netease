@@ -51,7 +51,7 @@ public class OrderDaoTest extends BaseTest {
 	@Test
 	@Ignore
 	public void testQueryUserOrder(){
-		List<Order> orderList = orderDao.queryUserOrder(1L);
+		List<Order> orderList = orderDao.queryUserOrder(1);
 		assertEquals(2, orderList.size());
 	}
 	

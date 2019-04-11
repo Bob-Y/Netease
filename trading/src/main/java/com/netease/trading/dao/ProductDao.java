@@ -2,6 +2,7 @@ package com.netease.trading.dao;
 
 import java.util.List;
 
+import com.netease.trading.dto.UserProduct;
 import com.netease.trading.entity.Order;
 import com.netease.trading.entity.Product;
 
@@ -27,4 +28,13 @@ public interface ProductDao {
 	 * @return productList
 	 */
 	List<Product> queryProduct();
+
+	Product findById(Integer pid);
+
+	Product findBoughtById(Integer pid);
+
+	List<UserProduct> queryUserProduct(Integer uid);
+
+	List<Product> queryUnBought(Integer uid);
+
 }

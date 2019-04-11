@@ -7,4 +7,6 @@ public interface UserDao {
 	 * @return userList
 	 */
 	List<User> queryUser();
+
+	User findUser(String username);
 }

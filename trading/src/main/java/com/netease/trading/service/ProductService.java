@@ -1,7 +1,10 @@
 package com.netease.trading.service;
 
+import com.netease.trading.dto.CartItemDto;
 import com.netease.trading.dto.ProductExecution;
 import com.netease.trading.entity.Product;
+
+import java.util.List;
 
 public interface ProductService {
 
@@ -13,5 +16,7 @@ public interface ProductService {
 	ProductExecution addProduct(Product product);
 			
 	ProductExecution modifyProduct(Product product);
+
+	boolean addOrder(List<CartItemDto> cart);
 }
 

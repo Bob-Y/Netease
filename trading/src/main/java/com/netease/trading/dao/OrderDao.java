@@ -2,6 +2,7 @@ package com.netease.trading.dao;
 
 import java.util.List;
 
+import com.netease.trading.dto.CartItemDto;
 import com.netease.trading.entity.Order;
 import com.netease.trading.entity.User;
 
@@ -26,5 +27,7 @@ public interface OrderDao {
 	 * list order
 	 * @return orderList
 	 */
-	List<Order> queryUserOrder(Long userId);
+	List<Order> queryUserOrder(Integer userId);
+
+	int addOrder(CartItemDto item, Long uid);
 }
