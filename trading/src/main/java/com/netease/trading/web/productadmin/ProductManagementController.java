@@ -170,43 +170,6 @@ public class ProductManagementController {
 		return modelMap;
 	}
 
-	@RequestMapping(value = "/addToCart", method = RequestMethod.POST)
-	@ResponseBody
-	private ModelMap addToCart(@RequestBody CartItemDto item, HttpServletRequest request) {
-		ModelMap modelMap = new ModelMap();
-
-		HttpSession session = request.getSession();
-		List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
-		if(null != cart) {
-			for (CartItemDto dto : cart) {
-				if (dto.getProductId() == item.getProductId()) {
-					int count = dto.getCount() + item.getCount();
-					dto.setCount(count);
-					modelMap.put("success", true);
-					return modelMap;
-				}
-			}
-		} else {
-			cart = new ArrayList<>();
-		}
-		cart.add(item);
-		session.setAttribute("cart", cart);
-		modelMap.put("success", true);
-		return modelMap;
-
-	}
-
-	@RequestMapping(value = "/getCart", method = RequestMethod.GET)
-	@ResponseBody
-	public ModelMap getCart(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ModelMap result = new ModelMap();
-		result.put("cart", 	session.getAttribute("cart"));
-		return result;
-
-	}
-
-
 
 
 }

@@ -47,7 +47,7 @@ public class LoginController {
         request.getSession().removeAttribute("user");
         ModelMap modelMap = new ModelMap();
         modelMap.put("success", true);
-        return "login";
+        return "html/login";
     }
 
 }

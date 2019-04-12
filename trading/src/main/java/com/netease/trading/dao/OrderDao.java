@@ -5,6 +5,8 @@ import java.util.List;
 import com.netease.trading.dto.CartItemDto;
 import com.netease.trading.entity.Order;
 import com.netease.trading.entity.User;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PathVariable;
 
 public interface OrderDao {
 	/**
@@ -29,5 +31,5 @@ public interface OrderDao {
 	 */
 	List<Order> queryUserOrder(Integer userId);
 
-	int addOrder(CartItemDto item, Long uid);
+	int addOrder(@Param("item") CartItemDto item, @Param("uid") Long uid);
 }

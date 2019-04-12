@@ -9,8 +9,7 @@
 		VALUES(now(),#{orderProduct.productId},#{orderQuantity},#{orderPrice},#{orderUser.userId})
 	</insert>
 
-	<insert id="addOrder" useGeneratedKeys="true"
-			keyColumn="order_id" keyProperty="orderId">
+	<insert id="addOrder">
 		INSERT INTO orderTable(order_time,order_product,order_quantity, order_price,order_user_id)
 		VALUES(now(),#{item.productId},#{item.count},#{item.price},#{uid})
 	</insert>

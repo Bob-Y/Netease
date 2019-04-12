@@ -24,4 +24,8 @@ public interface CartItemDao {
 	 * @return
 	 */
 	int deleteCartItem(long cartItemId);
+
+	int delCart(Integer id);
+
+	CartItem query(Integer pid);
 }
