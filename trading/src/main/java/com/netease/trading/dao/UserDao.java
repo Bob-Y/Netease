@@ -9,4 +9,6 @@ public interface UserDao {
 	List<User> queryUser();
 
 	User findUser(String username);
+
+	User findById(Integer id);
 }

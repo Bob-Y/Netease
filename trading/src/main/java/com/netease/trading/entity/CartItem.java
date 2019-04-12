@@ -24,4 +24,13 @@ public class CartItem {
 	private Long cartItemId;
 	private Product cartItemProduct;
 	private Integer cartItemQuantity;
+	private Integer cartId;
+
+	public Integer getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(Integer cartId) {
+		this.cartId = cartId;
+	}
 }

@@ -5,14 +5,15 @@
 <mapper namespace="com.netease.trading.dao.CartItemDao">
 	<insert id="insertCartItem" useGeneratedKeys="true"
 		keyColumn="cartItem_id" keyProperty="cartItemId">
-		INSERT INTO cartitem(cartItem_product_id,cartItem_quantity)
-		VALUES(#{cartItemProduct.productId},#{cartItemQuantity})
+		INSERT INTO cartitem(cartItem_product_id,cartItem_quantity, cart_id)
+		VALUES(#{cartItemProduct.productId},#{cartItemQuantity}, #{cartId})
 	</insert>
 	<update id="updateCartItem" parameterType="com.netease.trading.entity.CartItem">
 	update cartitem
 		<set>
 		<if test="cartItemProduct != null">cartItem_product_id=#{cartItemProduct.productId},</if>
-		<if test="cartItemQuantity != null">cartItem_quantity=#{cartItemQuantity}</if>
+		<if test="cartItemQuantity != null">cartItem_quantity=#{cartItemQuantity},</if>
+			<if test="cartId != null"> cart_id = #{cartId}</if>
 		</set>
 		where cartItem_id=#{cartItemId}
 	</update>
@@ -22,5 +23,16 @@
 		WHERE
 		cartItem_id =
 		#{cartItemId}
+	</delete>
+	<select id="query" resultType="com.netease.trading.entity.CartItem">
+		select *
+		from cartitem
+		where cartItem_product_id = #{pid}
+	</select>
+
+	<delete id="delCart">
+		DELETE FROM
+		cartitem
+		WHERE cart_id = #{id}
 	</delete>
 </mapper>

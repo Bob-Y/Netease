@@ -15,4 +15,21 @@
 		</set>
 		where shoppingCart_id=#{shoppingCartID}
 	</update>
+	<select id="query" resultType="java.lang.Integer">
+		select shoppingCart_id
+		from shoppingcart
+		where shoppingCart_user_id = #{uid}
+	</select>
+
+	<select id="getCart" resultType="com.netease.trading.dto.CartItemDto">
+		select p.`product_id` as product_id, p.`product_title` as product_name, ci.`cartItem_quantity` as count, p.`product_price` as price
+		from shoppingcart sc, cartitem ci, product p
+		where sc.`shoppingCart_user_id` = #{uid} and sc.`shoppingCart_id` = ci.cart_id and ci.`cartItem_product_id` = p.`product_id`
+	</select>
+
+	<delete id="delCart">
+		DELETE FROM
+		shoppingcart
+		WHERE shoppingCart_user_id = #{uid}
+	</delete>
 </mapper>

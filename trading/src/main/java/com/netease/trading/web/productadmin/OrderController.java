@@ -1,19 +1,16 @@
 package com.netease.trading.web.productadmin;
 
-import com.netease.trading.dao.OrderDao;
-import com.netease.trading.dao.ProductDao;
-import com.netease.trading.dao.UserDao;
+import com.netease.trading.dao.*;
 import com.netease.trading.dto.CartItemDto;
 import com.netease.trading.dto.UserProduct;
-import com.netease.trading.entity.Order;
-import com.netease.trading.entity.Product;
-import com.netease.trading.entity.User;
+import com.netease.trading.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,6 +22,10 @@ public class OrderController {
     private OrderDao orderDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private CartItemDao cartItemDao;
+    @Autowired
+    private ShoppingCartDao shoppingCartDao;
 
     @GetMapping("/{id}")
     public ModelMap get(@PathVariable Integer id) {
@@ -52,7 +53,7 @@ public class OrderController {
         return result;
     }
 
-    @GetMapping("/{id}/all")
+    @GetMapping("/{id}/all") // /trading/product/1/all
     public List<UserProduct> all(@PathVariable Integer id) {
         return productDao.queryUserProduct(id);
     }
@@ -75,15 +76,16 @@ public class OrderController {
         return modelMap;
     }
 
-    @RequestMapping(value = "/addOrder", method = RequestMethod.GET)
-    private ModelMap addOrder(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
-        String username = (String) session.getAttribute("user");
-        User user = userDao.findUser(username);
+    @RequestMapping(value = "/addOrder/{userId}", method = RequestMethod.GET)
+    private ModelMap addOrder(@PathVariable Integer userId, HttpServletRequest request) {
+        List<CartItemDto> cart = shoppingCartDao.getCart(userId);
+        User user = userDao.findById(userId);
+        Integer cart_id = shoppingCartDao.query(userId);
         for(CartItemDto item: cart) {
             int result = orderDao.addOrder(item, user.getUserId());
         }
+        cartItemDao.delCart(cart_id);
+        shoppingCartDao.delCart(userId);
         ModelMap modelMap = new ModelMap();
         modelMap.put("success", true);
         return modelMap;
@@ -99,6 +101,66 @@ public class OrderController {
             modelMap.put("success", false);
         }
         return modelMap;
+    }
+
+    @RequestMapping(value = "/addToCart/{userId}", method = RequestMethod.POST)
+    @ResponseBody
+    private ModelMap addToCart(@RequestBody CartItemDto item, @PathVariable Integer userId, HttpServletRequest request) {
+        ModelMap modelMap = new ModelMap();
+
+//        HttpSession session = request.getSession();
+//        List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
+//        if(null != cart) {
+//            for (CartItemDto dto : cart) {
+//                if (dto.getProductId() == item.getProductId()) {
+//                    int count = dto.getCount() + item.getCount();
+//                    dto.setCount(count);
+//                    modelMap.put("success", true);
+//                    return modelMap;
+//                }
+//            }
+//        } else {
+//            cart = new ArrayList<>();
+//        }
+//        cart.add(item);
+//        session.setAttribute("cart", cart);
+        CartItem cartItem = cartItemDao.query(item.getProductId());
+        if(null != cartItem) {
+            int newCount = cartItem.getCartItemQuantity() + item.getCount();
+            cartItem.setCartItemQuantity(newCount);
+            cartItemDao.updateCartItem(cartItem);
+        } else {
+            Integer cartId = shoppingCartDao.query(userId);
+            if(cartId == null) {
+                ShoppingCart cart = new ShoppingCart();
+                User user = new User();
+                user.setUserId(Long.valueOf(userId));
+                cart.setShoppingCartUser(user);
+                shoppingCartDao.insertShoppingCart(cart);
+                cartId = shoppingCartDao.query(userId);
+            }
+            CartItem newOne = new CartItem();
+            Product product = new Product();
+            product.setProductId(Long.valueOf(item.getProductId()));
+            newOne.setCartId(cartId);
+            newOne.setCartItemProduct(product);
+            newOne.setCartItemQuantity(item.getCount());
+            cartItemDao.insertCartItem(newOne);
+        }
+        modelMap.put("success", true);
+        return modelMap;
+
+    }
+
+    @RequestMapping(value = "/getCart/{userId}", method = RequestMethod.GET)
+    @ResponseBody
+    public ModelMap getCart(@PathVariable Integer userId, HttpServletRequest request) {
+        ModelMap result = new ModelMap();
+        List<CartItemDto> cart = shoppingCartDao.getCart(userId);
+        result.put("success", true);
+        result.put("cart", 	cart);
+        return result;
+
     }
 
 }

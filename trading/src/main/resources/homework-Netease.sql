@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.09 (64 bit)
 MySQL - 8.0.15 : Database - trading
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -12,6 +13,9 @@ MySQL - 8.0.15 : Database - trading
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+DROP DATABASE /*!32312 IF NOT EXISTS*/`trading` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`trading` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
 USE `trading`;
@@ -24,9 +28,12 @@ CREATE TABLE `cartitem` (
   `cartItem_id` int(10) NOT NULL AUTO_INCREMENT,
   `cartItem_product_id` int(11) DEFAULT NULL,
   `cartItem_quantity` int(10) DEFAULT NULL,
+  `cart_id` int(10) not null,
   PRIMARY KEY (`cartItem_id`),
   KEY `cartItem_product` (`cartItem_product_id`),
-  CONSTRAINT `cartItem_product` FOREIGN KEY (`cartItem_product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `cartItem_cart` (`cart_id`),
+  CONSTRAINT `cartItem_product` FOREIGN KEY (`cartItem_product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `cartItem_cart` FOREIGN KEY (`cart_id`) REFERENCES `shoppingcart` (`shoppingCart_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `cartitem` */
