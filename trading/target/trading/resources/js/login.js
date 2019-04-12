@@ -192,17 +192,14 @@ $(function() {
             }),
             success : function(data) {
                 if (data.success) {
-                    $.toast('登录成功！');
                     if (data.userType == 1) {
                         // 跳转买家页面
-                        alert('buyer');
-                        window.location.href = '';
+                        window.location.href = '/trading/html/buyer/buyerProductList';
                     } else {
                         // 跳转卖家页面
-                        window.location.href = '/o2o/shopadmin/shoplist';
+                        window.location.href = '/trading/html/seller/sellerProductList';
                     }
                 } else {
-                    $.toast('登录失败！' + data.errMsg);
                 }
             }
         });

@@ -27,8 +27,9 @@
 		where order_id=#{orderId}
 	</update>
 	<select id="queryUserOrder" resultType="com.netease.trading.entity.Order" parameterType="Integer">
-		SELECT order_id, order_time,
-		order_product, order_quantity,order_price,order_user_id
-		FROM orderTable WHERE order_user_id = #{userId}
+		SELECT o.order_id, o.order_time, p.product_id as 'order_product.product_id', p.product_title as 'order_product.product_title', p.product_imgAddr as 'order_product.product_imgAddr',
+		o.order_quantity, o.order_price
+		FROM orderTable o, product p
+		WHERE o.order_product = p.product_id and o.order_user_id = #{userId}
 	</select>
 </mapper>
