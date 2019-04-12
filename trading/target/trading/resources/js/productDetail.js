@@ -2,17 +2,17 @@ $(function () {
     //从地址栏的url中获取商品id
     var productId = getQueryString('id');
     //获取商品信息的url
-    var productUrl = '/trading/product/' + productId;
-    $.getJSON(productUrl,function (data) {
-        if (data.success){
+    var productUrl = '/productadmin/OrderController/get/' + productId;
+    $.getJSON(productUrl, function(data) {
+        if (data.success) {
             var product = data.product;
-            $('#product-img').attr('src',product.product_image_address);
+            $('#product-img').attr('src',product.productImgAddr);
 
-            $('#product-title').text(product.product_title);
-            $('#product-abstract').text(product.product_abstract);
-            $('#product-price').text(product.product_price);
+            $('#product-title').text(product.productTitle);
+            $('#product-abstract').text(product.productAbstract);
+            $('#product-price').text(product.productPrice);
 
-            $('#product-Detail').text(product.product_detail);
+            $('#product-Detail').text(product.productDetail);
         }
     })
 })

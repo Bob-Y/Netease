@@ -81,4 +81,16 @@ public class OrderController {
         return modelMap;
     }
 
+    @GetMapping("/{pid}/del")
+    public ModelMap del(@PathVariable Integer pid) {
+        int result = productDao.deleteProduct(pid);
+        ModelMap modelMap = new ModelMap();
+        if (result == 1) {
+            modelMap.put("success", true);
+        } else {
+            modelMap.put("success", false);
+        }
+        return modelMap;
+    }
+
 }

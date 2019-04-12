@@ -2,9 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>商品详情</title>
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-$END$
+<div class="sui-container">
+    <div class="sui-navbar navbar-inverse">
+        <div class="navbar-inner" style="background: bisque">
+            <ul class="sui-nav">
+                <li>
+                    <!--请<button onclick="{location.href='./WEB-INF/html/login.html'}" style="background: transparent;border: transparent">[登录]</button>-->
+                    卖家你好，seller！<a href="html/login.html">[退出]</a>
+                </li>
+            </ul>
+            <ul class="sui-nav pull-right">
+                <li class="active"><a href="../../index.html" style="background: bisque;color: black">首页</a></li>
+                <li><a href="#" style="background: bisque;color: black">发布</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="product_detail">
+        <div class="p-summary">
+            <img align="left" class="img" id="product-img"  src="" alt="dada" />
+            <div class="content">
+                <p id="product-title">title</p>
+                <p id="product-abstract">abstract</p>
+                <p id="product-price">price</p>
+            </div>
+        </div>
+        <div class="p-detail">
+            <h2>详细信息</h2>
+            <hr />
+            <p id="product-Detail">balabalabala</p>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="submit" class="sui-btn btn-primary">编辑</button>
+    </div>
+
+</div>
+<script type='text/javascript'
+        src='../../resources/js/productDetail.js' charset='utf-8'></script>
 </body>
 </html>
