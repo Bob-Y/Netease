@@ -9,7 +9,7 @@ $(function() {
             dataType : "json",
             success : function(data) {
                 if (data.success) {
-                    handleList(data.orderList);
+                    handleList(data.bill);
                 }
             }
         });
@@ -17,17 +17,15 @@ $(function() {
     function handleList(data) {
         var html = '';
         data.map(function(item, index) {
-            html += '<div class="col-sm-6 col-md-3">' +
-                '<a href="../WEB-INF/html/buyer/account.html" class="thumbnail">'+
-                '<div class="caption">'+
-                '<h4>'+ item.orderId + '</h4>'+
-                '<p>' + item.orderTime + '</p>'+
-                '<p>'+item.orderProduct +'</p>'+
-                '<p>'+item.orderQuantity + '个</p>'+
-                '<p>'+item.orderPrice +'元</p>'+
-                '</div>'+
-                '</a>'+
-                '</div>'
+            html += '<tr>' +
+                '<a href="../WEB-INF/html/productDetail.html" class="thumbnail">'+
+                '<td>' + '<img src="\' + item.orderProduct.getproductImgAddr() + \'" alt="暂时无法显示" />' + '</td>' +
+                '<td>' + item.orderProduct.getProductTitle() + '</td>' +
+                '</a>' +
+                '<td>' + item.orderTime + '</td>' +
+                '<td>' + item.orderQuantity + '</td>' +
+                '<td>' + item.orderPrice + '</td>' +
+                '</tr>'
         });
         $('#orders_list').html(html);
     }
