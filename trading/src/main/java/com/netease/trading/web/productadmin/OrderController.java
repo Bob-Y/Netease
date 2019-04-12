@@ -26,11 +26,19 @@ public class OrderController {
     @Autowired
     private UserDao userDao;
 
-
     @GetMapping("/{id}")
-    public Product get(@PathVariable Integer id) {
+    public ModelMap get(@PathVariable Integer id) {
         System.out.println("get single product");
-        return productDao.findById(id);
+        Product byId = productDao.findById(id);
+        ModelMap result = new ModelMap();
+        if(null != byId) {
+            result.put("success", true);
+            result.put("product", byId);
+        } else {
+            result.put("success", false);
+            result.put("errorMsg", "no such product");
+        }
+        return  result;
     }
 
     @GetMapping("/user/{id}")

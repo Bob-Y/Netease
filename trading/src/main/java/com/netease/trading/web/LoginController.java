@@ -43,12 +43,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "logout.action", method = RequestMethod.GET)
-    @ResponseBody
-    private ModelMap logout(HttpServletRequest request) {
+    private String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("user");
         ModelMap modelMap = new ModelMap();
         modelMap.put("success", true);
-        return modelMap;
+        return "login";
     }
 
 }
