@@ -1,6 +1,6 @@
 $(function() {
     // 获取orderlist URL
-    var initUrl = '/trading//bill';
+    var initUrl = '/trading/product/2/bill';
     getlist();
     function getlist() {
         $.ajax({
@@ -10,6 +10,7 @@ $(function() {
             success : function(data) {
                 if (data.success) {
                     handleList(data.bill);
+                    $('#account').text(data.price);
                 }
             }
         });
@@ -18,7 +19,7 @@ $(function() {
         var html = '';
         data.map(function(item, index) {
             html += '<tr>' +
-                '<a href="../WEB-INF/html/productDetail.html" class="thumbnail">'+
+                '<a href="/trading/html/buyerProductDetail.html" class="thumbnail">'+
                 '<td>' + '<img src="\' + item.orderProduct.getproductImgAddr() + \'" alt="暂时无法显示" />' + '</td>' +
                 '<td>' + item.orderProduct.getProductTitle() + '</td>' +
                 '</a>' +
@@ -27,6 +28,6 @@ $(function() {
                 '<td>' + item.orderPrice + '</td>' +
                 '</tr>'
         });
-        $('#orders_list').html(html);
+        $('#account_list').html(html);
     }
 });

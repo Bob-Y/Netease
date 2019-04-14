@@ -19,7 +19,7 @@ $(function() {
 		data.map(function(item, index) {
 			if (item.hasBought) {
                 html += '<div class="col-sm-6 col-md-3">' +
-                    '<a href="/trading/html/productDetail?id='+item.productId+'" class="thumbnail">'+
+                    '<a href="/trading/html/seller/sellerProductDetail?id='+item.productId+'" class="thumbnail">'+
                     '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
                     '<div class="caption">'+
                     '<h4>'+ item.productTitle + '</h4>'+
@@ -28,9 +28,9 @@ $(function() {
                     '</a>'+
 					'<div class="sell-tag">已购买</div> '+
                     '</div>'
-			}else {
+			} else {
                 html += '<div class="col-sm-6 col-md-3">' +
-                    '<a href="/trading/html/productDetail?id='+item.productId+'" class="thumbnail">'+
+                    '<a href="/trading/html/seller/sellerProductDetail?id='+item.productId+'" class="thumbnail">'+
                     '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
                     '<div class="caption">'+
                     '<h4>'+ item.productTitle + '</h4>'+

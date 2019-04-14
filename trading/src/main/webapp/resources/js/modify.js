@@ -11,9 +11,9 @@ $(function () {
             $('#product_price').val(product.productPrice);
             $('#product_detail').val(product.productPrice);
         }
-    })
+    });
 
-    var modifyProductUrl = '/trading/productadmin/*****';
+    var modifyProductUrl = '/trading/productadmin/modifyproduct';
     // 提交按钮的事件响应
     $('#submit').click(function() {
         // 创建product对象
@@ -50,4 +50,4 @@ $(function () {
             }
         });
     });
-})
+});

@@ -18,7 +18,7 @@ $(function() {
 		var html = '';
 		data.map(function(item, index) {
                 html += '<div class="col-sm-6 col-md-3">' +
-                    '<a href="/trading/html/productDetail?id='+item.productId+'" class="thumbnail">'+
+                    '<a href="/trading/html/buyer/buyerProductDetail?id='+item.productId+'" class="thumbnail">'+
                     '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
                     '<div class="caption">'+
                     '<h4>'+ item.productTitle + '</h4>'+

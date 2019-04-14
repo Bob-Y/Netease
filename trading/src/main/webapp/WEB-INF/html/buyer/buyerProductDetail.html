@@ -14,13 +14,13 @@
             <ul class="sui-nav">
                 <li>
                     <!--请<button onclick="{location.href='./WEB-INF/html/login.html'}" style="background: transparent;border: transparent">[登录]</button>-->
-                    买家你好，buyer！<a href="html/login.html">[退出]</a>
+                    买家你好，buyer！<a href="/trading/html/login">[退出]</a>
                 </li>
             </ul>
             <ul class="sui-nav pull-right">
-                <li class="active"><a href="../../index.html" style="background: bisque;color: black">首页</a></li>
-                <li><a href="#" style="background: bisque;color: black">账务</a></li>
-                <li><a href="#" style="background: bisque;color: black">购物车</a></li>
+                <li class="active"><a href="/trading/html/buyer/buyerProductList" style="background: bisque;color: black">首页</a></li>
+                <li><a href="/trading/html/buyer/account" style="background: bisque;color: black">账务</a></li>
+                <li><a href="/trading/html/buyer/cart" style="background: bisque;color: black">购物车</a></li>
             </ul>
         </div>
     </div>
@@ -28,21 +28,24 @@
         <div class="p-summary">
             <img align="left" class="img" id="product-img"  src="" alt="dada" />
             <div class="content">
-                <p id="product-title">title</p>
-                <p id="product-abstract">abstract</p>
-                <p id="product-price">price</p>
+                <p id="product-title"></p>
+                <p id="product-abstract"></p>
+                <p id="product-price"></p>
             </div>
             <div id="user-button"></div>
         </div>
         <div class="p-detail">
             <h2>详细信息</h2>
             <hr />
-            <p id="product-detail">balabalabala</p>
+            <p id="product-detail"></p>
         </div>
     </div>
 
 </div>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type='text/javascript' src='/trading/resources/js/common.js'
+        charset='utf-8'></script>
 <script type='text/javascript'
-        src='../../resources/js/productDetail.js' charset='utf-8'></script>
+        src='/trading/resources/js/buyerProductDetail.js' charset='utf-8'></script>
 </body>
 </html>
