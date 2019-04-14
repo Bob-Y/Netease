@@ -37,7 +37,7 @@
 		WHERE product_id = #{pid}
 	</select>
 
-	<select id="findBoughtById" resultType="com.netease.trading.entity.Product">>
+	<select id="findBoughtById" resultType="com.netease.trading.entity.Product">
 		SELECT p.product_id, p.product_title,p.product_abstract,p.product_detail,
 		o.order_price as product_price
 		FROM product p, `ordertable` o
