@@ -19,6 +19,7 @@ com\netease\trading\exceptions\ProductOperationException.class
 com\netease\trading\util\MD5Util.class
 com\netease\trading\dao\ProductDao.class
 com\netease\trading\dto\BillItem.class
+com\netease\trading\dto\ProductDto.class
 com\netease\trading\util\PathUtil.class
 com\netease\trading\web\productadmin\ProductManagementController.class
 com\netease\trading\util\UserAuth.class

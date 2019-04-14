@@ -37,7 +37,24 @@
             </ul>
         </div>
     </div>
-
+    <ul class="sui-breadcrumb" style="background: darkgrey">
+        <li>已添加到购物车的内容</li>
+    </ul>
+    <div class="cartlist">
+        <table width="300" border="1" align="center">
+            <tr>
+                <th>商品名称</th>
+                <th>数量</th>
+                <th>价格</th>
+            </tr>
+            <tbody id="cart_list"></tbody>
+        </table>
+    </div>
+    <br>
+    <div align="center">
+        <button onclick="{location.href='html/login.html'}">退出</button>
+        <button id="buy_button" onclick="buy()">购买</button>
+    </div>
 
 </div>
 <script type='text/javascript' src='./resources/js/cart.js' charset='utf-8'></script>
