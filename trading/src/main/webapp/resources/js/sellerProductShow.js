@@ -17,6 +17,18 @@ $(function() {
 	function handleList(data) {
 		var html = '';
 		data.map(function(item, index) {
+			if (item.hasBought) {
+                html += '<div class="col-sm-6 col-md-3">' +
+                    '<a href="/trading/html/productDetail?id='+item.productId+'" class="thumbnail">'+
+                    '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
+                    '<div class="caption">'+
+                    '<h4>'+ item.productTitle + '</h4>'+
+                    '<p>'+item.productPrice +'元</p>'+
+                    '</div>'+
+                    '</a>'+
+					'<div class="sell-tag">已购买</div> '+
+                    '</div>'
+			}else {
                 html += '<div class="col-sm-6 col-md-3">' +
                     '<a href="/trading/html/productDetail?id='+item.productId+'" class="thumbnail">'+
                     '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
@@ -26,6 +38,8 @@ $(function() {
                     '</div>'+
                     '</a>'+
                     '</div>'
+			}
+
 		});
 		$('#products_list').html(html);
 	}
