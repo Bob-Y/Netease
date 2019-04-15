@@ -31,6 +31,10 @@ $(function() {
 		});
 		$('#products_list').html(html);
 	}
+    $('#all-product').click(function() {
+        initUrl = allProductUrl;
+        getlist();
+    });
     $('#unbought-product').click(function() {
         initUrl = unBoughtProductUrl;
         getlist();

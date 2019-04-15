@@ -42,11 +42,13 @@
     </ul>
     <div class="cartlist">
         <table width="300" border="1" align="center">
-            <tr>
+            <thead>
+                <tr>
                 <th>商品名称</th>
                 <th>数量</th>
                 <th>价格</th>
-            </tr>
+                </tr>
+            </thead>
             <tbody id="cart_list"></tbody>
         </table>
     </div>
@@ -58,5 +60,19 @@
 
 </div>
 <script type='text/javascript' src='/trading/resources/js/cart.js' charset='utf-8'></script>
+<script type="text/javascript">
+    function buy() {
+        $.ajax({
+            url : '/trading/product/addOrder/2',
+            type : "get",
+            dataType : "json",
+            success : function(data) {
+                if (data.success) {
+                    alert('订单完成');
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

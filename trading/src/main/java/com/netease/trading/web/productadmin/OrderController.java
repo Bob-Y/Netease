@@ -59,8 +59,12 @@ public class OrderController {
     }
 
     @GetMapping("/{id}/unBought")
-    public List<Product> unBought(@PathVariable Integer id) {
-        return productDao.queryUnBought(id);
+    public ModelMap unBought(@PathVariable Integer id) {
+        ModelMap result = new ModelMap();
+        List<Product> products = productDao.queryUnBought(id);
+        result.put("success", true);
+        result.put("productList", products);
+        return result;
     }
 
     @GetMapping("/{id}/bill")
@@ -108,22 +112,6 @@ public class OrderController {
     private ModelMap addToCart(@RequestBody CartItemDto item, @PathVariable Integer userId, HttpServletRequest request) {
         ModelMap modelMap = new ModelMap();
 
-//        HttpSession session = request.getSession();
-//        List<CartItemDto> cart = (List<CartItemDto>) session.getAttribute("cart");
-//        if(null != cart) {
-//            for (CartItemDto dto : cart) {
-//                if (dto.getProductId() == item.getProductId()) {
-//                    int count = dto.getCount() + item.getCount();
-//                    dto.setCount(count);
-//                    modelMap.put("success", true);
-//                    return modelMap;
-//                }
-//            }
-//        } else {
-//            cart = new ArrayList<>();
-//        }
-//        cart.add(item);
-//        session.setAttribute("cart", cart);
         CartItem cartItem = cartItemDao.query(item.getProductId());
         if(null != cartItem) {
             int newCount = cartItem.getCartItemQuantity() + item.getCount();

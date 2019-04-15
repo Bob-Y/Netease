@@ -15,33 +15,35 @@ $(function () {
             if (userProduct.hasBought) {
                 html += '<button type="button" disabled="disabled">已购买</button>'
             } else {
-                html += '<button type="button" id="add-to-cart">加入购物车</button>'
+                html += '<button type="button" id="add-to-cart" onclick="addToCart()">加入购物车</button>'
             }
             $('#user-button').html(html);
+            $('#add-to-cart').click(function() {
+                var cartItemDto = {};
+                // 获取表单里的数据并填充进对应的店铺属性中
+                cartItemDto.productId = productId;
+                cartItemDto.productName = $('#product_title').val();
+                cartItemDto.count = $('#count').val();
+                cartItemDto.price = $('#product-price').val();
+                var addToCartUrl = baseUrl + 'product/addToCart/2';
+                $.ajax({
+                    url : addToCartUrl,
+                    type : 'POST',
+                    data : JSON.stringify(cartItemDto),
+                    contentType : 'application/json; charset=utf-8',
+                    processData : false,
+                    cache : false,
+                    success : function(data) {
+                        if (data.success) {
+                            alert('提交成功！');
+                        } else {
+                            alert('提交失败！' + data.errMsg);
+                        }
+                    }
+                });
+
+            });
         }
     });
-    var addToCartUrl = baseUrl + 'product/addToCart/2';
-    $('#add-to-cart').click(function() {
-        var cartItemDto = {};
-        // 获取表单里的数据并填充进对应的店铺属性中
-        cartItemDto.productId = productId;
-        cartItemDto.productName = $('#product_title').val();
-        cartItemDto.count = $('#count').val();
-        cartItemDto.price = $('#product-price').val;
-        $.ajax({
-            url : addToCartUrl,
-            type : 'POST',
-            data : JSON.stringify(cartItemDto),
-            contentType : false,
-            processData : false,
-            cache : false,
-            success : function(data) {
-                if (data.success) {
-                    alert('提交成功！');
-                } else {
-                    alert('提交失败！' + data.errMsg);
-                }
-            }
-        });
-    });
+
 });
