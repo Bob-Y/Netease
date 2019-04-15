@@ -9,6 +9,7 @@ $(function () {
             $('#product_title').val(product.productTitle);
             $('#product_abstract').val(product.productAbstract);
             $('#product_price').val(product.productPrice);
+            $('#product_image_address').val(product.productImgAddr);
             $('#product_detail').val(product.productDetail);
         }
     });

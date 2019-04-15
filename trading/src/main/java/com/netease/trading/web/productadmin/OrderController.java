@@ -63,14 +63,24 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public Integer replace(@RequestBody Product newResource, @PathVariable Integer id) {
+    public ModelMap replace(@RequestBody Product newResource, @PathVariable Integer id) {
+        ModelMap modelMap = new ModelMap();
         int result = productDao.updateProduct(newResource);
-        return result;
+        if(result >= 0) {
+            modelMap.put("success", true);
+        } else {
+            modelMap.put("success", false);
+        }
+        return modelMap;
     }
 
     @GetMapping("/{id}/all") // /trading/product/1/all
-    public List<UserProduct> all(@PathVariable Integer id) {
-        return productDao.queryUserProduct(id);
+    public ModelMap all(@PathVariable Integer id) {
+        ModelMap result = new ModelMap();
+        List<UserProduct> userProducts = productDao.queryUserProduct(id);
+        result.put("success", true);
+        result.put("productList",userProducts);
+        return result;
     }
 
     @GetMapping("/{id}/unBought")
