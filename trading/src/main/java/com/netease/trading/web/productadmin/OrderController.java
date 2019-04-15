@@ -75,8 +75,9 @@ public class OrderController {
         for (Order order : orders) {
             total_price += order.getOrderPrice() * order.getOrderQuantity();
         }
-        modelMap.addAttribute("bill", orders);
-        modelMap.addAttribute("price", total_price);
+        modelMap.put("success", true);
+        modelMap.put("bill", orders);
+        modelMap.put("price", total_price);
         return modelMap;
     }
 
