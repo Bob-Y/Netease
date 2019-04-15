@@ -48,11 +48,15 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public Integer replace(@RequestBody Product newResource, @PathVariable Integer id) {
+    public ModelMap replace(@RequestBody Product newResource, @PathVariable Integer id) {
         ModelMap modelMap = new ModelMap();
         int result = productDao.updateProduct(newResource);
-
-        return result;
+        if(result >= 0) {
+            modelMap.put("success", true);
+        } else {
+            modelMap.put("success", false);
+        }
+        return modelMap;
     }
 
     @GetMapping("/{id}/all") // /trading/product/1/all
