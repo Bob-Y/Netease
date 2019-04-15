@@ -1,6 +1,7 @@
 $(function() {
 	// 获取productlist URL
-	var initUrl = '/trading/productadmin/getproductlist';
+	// var initUrl = '/trading/productadmin/getproductlist';
+    var initUrl = '/trading/product/2/all';
 	getlist();
 	function getlist() {
 		$.ajax({
@@ -17,7 +18,7 @@ $(function() {
 	function handleList(data) {
 		var html = '';
 		data.map(function(item, index) {
-			if (item.hasBought) {
+			if(item.hasBought) {
                 html += '<div class="col-sm-6 col-md-3">' +
                     '<a href="/trading/html/seller/sellerProductDetail?id='+item.productId+'" class="thumbnail">'+
                     '<img src="'+ item.productImgAddr + '" alt="暂时无法显示" />' +
@@ -26,7 +27,7 @@ $(function() {
                     '<p>'+item.productPrice +'元</p>'+
                     '</div>'+
                     '</a>'+
-					'<div class="sell-tag">已购买</div> '+
+					'<div class="sell-tag">已购买</div>'+
                     '</div>'
 			} else {
                 html += '<div class="col-sm-6 col-md-3">' +
