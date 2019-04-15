@@ -37,6 +37,13 @@
 		WHERE product_id = #{pid}
 	</select>
 
+	<select id="findUserProductById" resultType="com.netease.trading.dto.UserProduct">
+		SELECT p.*,
+		p.`product_id` in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = 2) as hasBought
+		FROM product p
+		WHERE p.product_id = #{pid}
+	</select>
+
 	<select id="findBoughtById" resultType="com.netease.trading.entity.Product">
 		SELECT p.product_id, p.product_title,p.product_abstract,p.product_detail,
 		o.order_price as product_price
