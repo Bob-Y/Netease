@@ -19,6 +19,7 @@ $(function () {
         // 创建product对象
         var product = {};
         // 获取表单里的数据并填充进对应的店铺属性中
+        product.productId = productId;
         product.productTitle = $('#product_title').val();
         product.productAbstract = $('#product_abstract').val();
         product.productDetail = $('#product_detail').val();
@@ -35,7 +36,7 @@ $(function () {
             url : modifyProductUrl,
             type : 'PUT',
             data : JSON.stringify(product),
-            contentType : false,
+            contentType : 'application/json; charset=utf-8',
             processData : false,
             cache : false,
             success : function(data) {
