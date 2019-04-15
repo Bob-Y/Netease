@@ -2,7 +2,7 @@ $(function () {
     //从地址栏的url中获取商品id
     var productId = getQueryString('id');
     //获取商品信息的url
-    var userProductUrl = baseUrl + 'product/' + productId;
+    var userProductUrl = baseUrl + 'product/userproduct/' + productId;
     $.getJSON(userProductUrl, function(data) {
         if (data.success) {
             var userProduct = data.product;
@@ -12,7 +12,7 @@ $(function () {
             $('#product-price').text(userProduct.productPrice);
             $('#product-detail').text(userProduct.productDetail);
             var html = '';
-            if (userProduct.hasBought) {
+            if(userProduct.hasBought) {
                 html += '<button type="button" disabled="disabled">已购买</button>'
             } else {
                 html += '<button type="button" id="add-to-cart" onclick="addToCart()">加入购物车</button>'

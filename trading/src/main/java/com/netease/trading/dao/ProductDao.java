@@ -31,6 +31,8 @@ public interface ProductDao {
 
 	Product findById(Integer pid);
 
+	UserProduct findUserProductById(Integer pid);
+
 	Product findBoughtById(Integer pid);
 
 	List<UserProduct> queryUserProduct(Integer uid);
