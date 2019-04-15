@@ -8,6 +8,15 @@ $(function () {
             var product = data.product;
             $('#product_title').val(product.productTitle);
             $('#product_abstract').val(product.productAbstract);
+            var productImgType = product.productImgType;
+            if (productImgType == 1){
+                // $("input[value='1']").attr("checked","checked");
+                $("input[name='product_imgType']").get(0).checked = true;
+            } else {
+                // $("input[value='2']").attr("checked","checked");
+                $("input[name='product_imgType']").get(1).checked = true;
+            }
+            $('#product_image_address').val(product.productImgAddr);
             $('#product_price').val(product.productPrice);
             $('#product_image_address').val(product.productImgAddr);
             $('#product_detail').val(product.productDetail);
@@ -26,7 +35,7 @@ $(function () {
         product.productDetail = $('#product_detail').val();
         product.productPrice = $('#product_price').val();
         product.productImgAddr = $('#product_image_address').val();
-        product.product_imgType = $('#product_imgType').val();
+        product.productImgType = $('#product_imgType').val();
         // if ($('#product_imgType').val().isEqual("1")) {
         //     product.product_imgType = 1;
         // } else {

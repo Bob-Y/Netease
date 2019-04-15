@@ -14,11 +14,11 @@ $(function() {
 		product.productDetail = $('#product_detail').val();
 		product.productPrice = $('#product_price').val();
 		product.productImgAddr = $('#product_image_address').val();
-        product.product_imgType = $('#product_imgType').val();
+        product.productImgType = $("input[name='product_imgType']:checked").val();
         // if ($('#product_imgType').val().isEqual("1")) {
-        //     product.product_imgType = 1;
+        //     product.productImgType = 1;
         // } else {
-        //     product.product_imgType = 2;
+        //     product.productImgType = 2;
         // }
 		var formData = new FormData();
 		// 将shop json对象转成字符流保存至表单对象key为shopStr的的键值对里
