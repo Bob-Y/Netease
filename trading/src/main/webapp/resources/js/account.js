@@ -21,9 +21,9 @@ $(function() {
             html += '<tr>' +
                 '<a href="/trading/html/buyerProductDetail.html" class="thumbnail">'+
                 '<td>' + '<img src="\' + item.orderProduct.getproductImgAddr() + \'" alt="暂时无法显示" />' + '</td>' +
-                '<td>' + item.orderProduct.getProductTitle() + '</td>' +
+                '<td>' + item.orderProduct.productTitle + '</td>' +
                 '</a>' +
-                '<td>' + item.orderTime + '</td>' +
+                '<td>' + new Date(item.orderTime) + '</td>' +
                 '<td>' + item.orderQuantity + '</td>' +
                 '<td>' + item.orderPrice + '</td>' +
                 '</tr>'
