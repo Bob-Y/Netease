@@ -14,5 +14,8 @@ $(function () {
 
             $('#product-Detail').text(product.productDetail);
         }
-    })
+    });
+    $('#modify').click(function() {
+        location.href='productModify?id='+ productId;
+    });
 });

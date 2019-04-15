@@ -32,6 +32,26 @@
                 <p id="product-abstract"></p>
                 <p id="product-price"></p>
             </div>
+            <input type="text" id="count" value="1"/>
+            <input type="button" onclick="add()" value="+"><input type="button" onclick="sub()" value="-">
+            <script>
+                function add() {
+                    var count = document.getElementById("count");
+                    var a = count.value;
+                    a++;
+                    count.value = a;
+                }
+                function sub() {
+                    var count = document.getElementById("count");
+                    var a = count.value;
+                    if(a > 1) {
+                        a--;
+                        count.value = a;
+                    } else {
+                        count.value = 1;
+                    }
+                }
+            </script>
             <div id="user-button"></div>
         </div>
         <div class="p-detail">

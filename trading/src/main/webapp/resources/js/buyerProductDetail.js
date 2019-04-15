@@ -19,5 +19,29 @@ $(function () {
             }
             $('#user-button').html(html);
         }
-    })
+    });
+    var addToCartUrl = baseUrl + 'product/addToCart/2';
+    $('#add-to-cart').click(function() {
+        var cartItemDto = {};
+        // 获取表单里的数据并填充进对应的店铺属性中
+        cartItemDto.productId = productId;
+        cartItemDto.productName = $('#product_title').val();
+        cartItemDto.count = $('#count').val();
+        cartItemDto.price = $('#product-price').val;
+        $.ajax({
+            url : addToCartUrl,
+            type : 'POST',
+            data : JSON.stringify(cartItemDto),
+            contentType : false,
+            processData : false,
+            cache : false,
+            success : function(data) {
+                if (data.success) {
+                    alert('提交成功！');
+                } else {
+                    alert('提交失败！' + data.errMsg);
+                }
+            }
+        });
+    });
 });

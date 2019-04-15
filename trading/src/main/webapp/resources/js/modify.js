@@ -13,7 +13,7 @@ $(function () {
         }
     });
 
-    var modifyProductUrl = '/trading/productadmin/modifyproduct';
+    var modifyProductUrl = '/trading/product/'+productId;
     // 提交按钮的事件响应
     $('#submit').click(function() {
         // 创建product对象
@@ -30,14 +30,11 @@ $(function () {
         // } else {
         //     product.product_imgType = 2;
         // }
-        var formData = new FormData();
-        // 将shop json对象转成字符流保存至表单对象key为shopStr的的键值对里
-        formData.append('productStr', JSON.stringify(product));
         // 将数据提交至后台处理相关操作
         $.ajax({
             url : modifyProductUrl,
-            type : 'POST',
-            data : formData,
+            type : 'PUT',
+            data : JSON.stringify(product),
             contentType : false,
             processData : false,
             cache : false,

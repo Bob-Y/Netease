@@ -1,6 +1,8 @@
 $(function() {
 	// 获取productlist URL
-	var initUrl = '/trading/productadmin/getproductlist';
+	var allProductUrl = '/trading/productadmin/getproductlist';
+	var unBoughtProductUrl = '/trading/product/2/unBought';
+	var initUrl = allProductUrl;
 	getlist();
 	function getlist() {
 		$.ajax({
@@ -29,4 +31,8 @@ $(function() {
 		});
 		$('#products_list').html(html);
 	}
+    $('#unbought-product').click(function() {
+        initUrl = unBoughtProductUrl;
+        getlist();
+    });
 });
