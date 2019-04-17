@@ -124,12 +124,12 @@ public class OrderController {
     @GetMapping("/del/{id}")
     public ModelMap del(@PathVariable Integer id) {
         int result = productDao.deleteProduct(id);
-        cartItemDao.delCartByProductId(id);
 
         ModelMap modelMap = new ModelMap();
         if (result < 0) {
             modelMap.put("success", false);
         } else {
+            cartItemDao.delCartByProductId(id);
             modelMap.put("success", true);
         }
         return modelMap;
