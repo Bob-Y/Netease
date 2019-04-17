@@ -15,7 +15,7 @@ $(function () {
             if(userProduct.hasBought) {
                 html += '<button type="button" disabled="disabled">已购买</button>'
             } else {
-                html += '<button type="button" id="add-to-cart" onclick="addToCart()">加入购物车</button>'
+                html += '<button type="button" id="add-to-cart">加入购物车</button>'
             }
             $('#user-button').html(html);
             $('#add-to-cart').click(function() {
