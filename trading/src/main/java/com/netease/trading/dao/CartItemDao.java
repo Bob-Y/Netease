@@ -27,5 +27,7 @@ public interface CartItemDao {
 
 	int delCart(Integer id);
 
+	int delCartByProductId(Integer pid);
+
 	CartItem query(Integer pid);
 }

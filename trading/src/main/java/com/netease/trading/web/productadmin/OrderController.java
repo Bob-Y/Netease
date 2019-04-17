@@ -121,14 +121,16 @@ public class OrderController {
         return modelMap;
     }
 
-    @GetMapping("/{pid}/del")
-    public ModelMap del(@PathVariable Integer pid) {
-        int result = productDao.deleteProduct(pid);
+    @GetMapping("/del/{id}")
+    public ModelMap del(@PathVariable Integer id) {
+        int result = productDao.deleteProduct(id);
+        cartItemDao.delCartByProductId(id);
+
         ModelMap modelMap = new ModelMap();
-        if (result == 1) {
-            modelMap.put("success", true);
-        } else {
+        if (result < 0) {
             modelMap.put("success", false);
+        } else {
+            modelMap.put("success", true);
         }
         return modelMap;
     }

@@ -35,4 +35,10 @@
 		cartitem
 		WHERE cart_id = #{id}
 	</delete>
+
+	<delete id="delCartByProductId">
+		DELETE FROM
+		cartitem
+		WHERE cartItem_product_id = #{pid}
+	</delete>
 </mapper>

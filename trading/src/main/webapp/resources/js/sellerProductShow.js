@@ -38,10 +38,26 @@ $(function() {
                     '<p>'+item.productPrice +'元</p>'+
                     '</div>'+
                     '</a>'+
-                    '</div>'
+                    '<div class="sell-tag" onclick="del('+item.productId+')">删除</div>'+
+                    '</div>'+
+                    '<script type="text/javascript">' +
+                    'function del(id) {' +
+                    'var delProductUrl = \'/trading/product/del/\' + id;' +
+                    '$.ajax({' +
+                    '    url: delProductUrl,' +
+                    '    type: \'GET\',' +
+                    '    dataType: "json",' +
+                    '    success: function (data) {' +
+                    '        if (data.success) {' +
+                    '            alert(\'删除成功！\');' +
+                    '        }' +
+                    '    }' +
+                    '});' +
+                    '}' +
+                    '</script>'
 			}
-
 		});
 		$('#products_list').html(html);
 	}
+
 });
