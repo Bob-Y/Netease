@@ -50,12 +50,12 @@ public class ProductServiceTest extends BaseTest {
 		ProductExecution pe = productService.modifyProduct(product);
 		assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
 	}
-	@Test
-//	@Ignore
-	public void testQueryProduct() {
-		ProductExecution pe = productService.getProductList();
-		System.out.println("总数为：" + pe.getCount());
-		assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
-	}
+//	@Test
+////	@Ignore
+//	public void testQueryProduct() {
+//		ProductExecution pe = productService.getProductList();
+//		System.out.println("总数为：" + pe.getCount());
+//		assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
+//	}
 
 }
