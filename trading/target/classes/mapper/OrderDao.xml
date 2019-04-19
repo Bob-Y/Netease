@@ -31,4 +31,9 @@
 		FROM orderTable o, product p
 		WHERE o.order_product = p.product_id and o.order_user_id = #{userId}
 	</select>
+	<select id="queryPriceByProduct" resultType="java.lang.Double" parameterType="Long">
+		SELECT order_price
+		FROM orderTable
+		WHERE order_product = #{pid}
+	</select>
 </mapper>

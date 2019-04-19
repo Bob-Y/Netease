@@ -62,18 +62,6 @@ public class OrderController {
         return productDao.findBoughtById(id);
     }
 
-    @PutMapping("/{id}")
-    public ModelMap replace(@RequestBody Product newResource, @PathVariable Integer id) {
-        ModelMap modelMap = new ModelMap();
-        int result = productDao.updateProduct(newResource);
-        if(result >= 0) {
-            modelMap.put("success", true);
-        } else {
-            modelMap.put("success", false);
-        }
-        return modelMap;
-    }
-
     @GetMapping("/{id}/all") // /trading/product/1/all
     public ModelMap all(@PathVariable Integer id) {
         ModelMap result = new ModelMap();
@@ -178,5 +166,15 @@ public class OrderController {
         return result;
 
     }
+
+    @GetMapping("/price/{id}")
+    public ModelMap getOrderPrice(@PathVariable Long id) {
+        ModelMap result = new ModelMap();
+        Double orderPrice = orderDao.queryPriceByProduct(id);
+        result.put("success", true);
+        result.put("price", orderPrice);
+        return result;
+    }
+
 
 }

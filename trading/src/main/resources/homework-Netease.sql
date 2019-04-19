@@ -56,7 +56,7 @@ CREATE TABLE `ordertable` (
 
 /*Data for the table `ordertable` */
 
-insert  into `ordertable`(`order_id`,`order_time`,`order_product`,`order_quantity`,`order_price`,`order_user_id`) values (1,'2019-03-23 13:10:10',2,15,13.5,2),(2,'2019-03-23 13:08:37',2,15,12.5,2);
+insert  into `ordertable`(`order_id`,`order_time`,`order_product`,`order_quantity`,`order_price`,`order_user_id`) values (1,'2019-03-23 13:10:10',2,15,13.5,2);
 
 /*Table structure for table `product` */
 

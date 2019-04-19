@@ -20,9 +20,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 
-	@Autowired
-	private OrderDao orderDao;
-
 	@Override
 	public ProductExecution getProductList() {
 		// 调用dao层取回商品列表
@@ -35,22 +32,35 @@ public class ProductServiceImpl implements ProductService {
 		return pe;
 	}
 
-	
 	@Override
 	@Transactional
 	public ProductExecution addProduct(Product product) {
 		// 空值判断
 		if (product != null) {
+			int titleLength = product.getProductTitle().length();
+			int abstractLength = product.getProductAbstract().length();
+			int detailLength = product.getProductDetail().length();
 			try {
-				// 创建商品信息
-				int effectedNum = productDao.insertProduct(product);
-				if (effectedNum <= 0) {
-					throw new ProductOperationException("创建商品失败");
+				if (titleLength < 2 || titleLength > 80) {
+					System.out.println("创建商品失败: productTitle长度不符合规定");
+					throw new ProductOperationException("创建商品失败: productTitle长度不符合规定");
+				}
+				else if (abstractLength < 2 || abstractLength > 140) {
+					System.out.println("创建商品失败: productAbstract长度不符合规定");
+					throw new ProductOperationException("创建商品失败: productAbstract长度不符合规定");
+				}
+				else if (detailLength < 2 || detailLength > 1000) {
+					System.out.println("创建商品失败: productDetail长度不符合规定");
+					throw new ProductOperationException("创建商品失败: productDetail长度不符合规定");
+				} else {
+					int effectedNum = productDao.insertProduct(product);
+					if (effectedNum <= 0) {
+						throw new ProductOperationException("创建商品失败");
+					}
 				}
 			} catch (Exception e) {
 				throw new ProductOperationException("创建商品失败:" + e.toString());
 			}
-
 			return new ProductExecution(ProductStateEnum.SUCCESS, product);
 		} else {
 			// 传参为空则返回空值错误信息
@@ -60,34 +70,39 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
-	public ProductExecution modifyProduct(Product product) throws ProductOperationException {
+	public ProductExecution modifyProduct(Product product) {
 		// 空值判断
 		if (product != null) {
-			
+			int titleLength = product.getProductTitle().length();
+			int abstractLength = product.getProductAbstract().length();
+			int detailLength = product.getProductDetail().length();
 			try {
 				// 更新商品信息
-				int effectedNum = productDao.updateProduct(product);
-				if (effectedNum <= 0) {
-					throw new ProductOperationException("更新商品信息失败");
+				if (titleLength < 2 || titleLength > 80) {
+					System.out.println("更新商品失败: productTitle长度不符合规定");
+					throw new ProductOperationException("更新商品失败: productTitle长度不符合规定");
 				}
-				return new ProductExecution(ProductStateEnum.SUCCESS, product);
+				else if (abstractLength < 2 || abstractLength > 140) {
+					System.out.println("更新商品失败: productAbstract长度不符合规定");
+					throw new ProductOperationException("更新商品失败: productAbstract长度不符合规定");
+				}
+				else if (detailLength < 2 || detailLength > 1000) {
+					System.out.println("更新商品失败: productDetail长度不符合规定");
+					throw new ProductOperationException("更新商品失败: productDetail长度不符合规定");
+				} else {
+					int effectedNum = productDao.updateProduct(product);
+					if (effectedNum <= 0) {
+						throw new ProductOperationException("更新商品信息失败");
+					}
+				}
 			} catch (Exception e) {
 				throw new ProductOperationException("更新商品信息失败:" + e.toString());
 			}
+			return new ProductExecution(ProductStateEnum.SUCCESS, product);
 		} else {
 			return new ProductExecution(ProductStateEnum.EMPTY);
 		}
 	}
-
-	@Override
-	public boolean addOrder(List<CartItemDto> cart) {
-		for(CartItemDto item: cart) {
-
-		}
-
-		return false;
-	}
-
 
 }
 

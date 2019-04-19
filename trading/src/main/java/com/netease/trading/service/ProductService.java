@@ -17,6 +17,5 @@ public interface ProductService {
 			
 	ProductExecution modifyProduct(Product product);
 
-	boolean addOrder(List<CartItemDto> cart);
 }
 

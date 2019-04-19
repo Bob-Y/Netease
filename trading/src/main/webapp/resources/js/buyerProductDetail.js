@@ -45,5 +45,11 @@ $(function () {
             });
         }
     });
+    var priceUrl = baseUrl + 'product/price/' + productId;
+    $.getJSON(priceUrl, function(data) {
+        if (data.success) {
+            $('#order-price').text(data.price);
+        }
+    });
 
 });

@@ -32,4 +32,6 @@ public interface OrderDao {
 	List<Order> queryUserOrder(Integer userId);
 
 	int addOrder(@Param("item") CartItemDto item, @Param("uid") Long uid);
+
+	Double queryPriceByProduct(Long pid);
 }

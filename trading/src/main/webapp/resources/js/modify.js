@@ -23,7 +23,7 @@ $(function () {
         }
     });
 
-    var modifyProductUrl = '/trading/product/'+productId;
+    var modifyProductUrl = baseUrl + 'productadmin/modifyproduct/' + productId;
     // 提交按钮的事件响应
     $('#submit').click(function() {
         // 创建product对象
