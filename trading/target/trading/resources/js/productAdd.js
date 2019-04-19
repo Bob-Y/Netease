@@ -13,13 +13,13 @@ $(function() {
 		product.productAbstract = $('#product_abstract').val();
 		product.productDetail = $('#product_detail').val();
 		product.productPrice = $('#product_price').val();
-		product.productImgAddr = $('#product_image_address').val();
+		// product.productImgAddr = $('#product_image_address').val();
         product.productImgType = $("input[name='product_imgType']:checked").val();
-        // if ($('#product_imgType').val().isEqual("1")) {
-        //     product.productImgType = 1;
-        // } else {
-        //     product.productImgType = 2;
-        // }
+        if ($('#product_imgType').val().isEqual("1")) {
+            product.productImgAddr=$('product_image_address').val();
+        } else {
+            product.productImgAddr=$('product_image_local').attr("src");
+        }
 		var formData = new FormData();
 		// 将shop json对象转成字符流保存至表单对象key为shopStr的的键值对里
 		formData.append('productStr', JSON.stringify(product));

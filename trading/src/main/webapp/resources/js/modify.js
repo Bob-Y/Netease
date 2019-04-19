@@ -8,13 +8,12 @@ $(function () {
             var product = data.product;
             $('#product_title').val(product.productTitle);
             $('#product_abstract').val(product.productAbstract);
-            var productImgType = product.productImgType;
-            if (productImgType == 1){
+            if (product.productImgType == 1){
                 // $("input[value='1']").attr("checked","checked");
-                $("input[name='product_imgType']").get(0).checked = true;
+                $("input:radio[name='product_imgType']").get(0).checked = true;
             } else {
                 // $("input[value='2']").attr("checked","checked");
-                $("input[name='product_imgType']").get(1).checked = true;
+                $("input:radio[name='product_imgType']").get(1).checked = true;
             }
             $('#product_image_address').val(product.productImgAddr);
             $('#product_price').val(product.productPrice);
@@ -28,7 +27,7 @@ $(function () {
     $('#submit').click(function() {
         // 创建product对象
         var product = {};
-        // 获取表单里的数据并填充进对应的店铺属性中
+        // 获取表单里的数据并填充进对应的商品属性中
         product.productId = productId;
         product.productTitle = $('#product_title').val();
         product.productAbstract = $('#product_abstract').val();

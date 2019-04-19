@@ -26,7 +26,7 @@
     </div>
     <ul class="sui-breadcrumb">
         <li>商品编辑</li>
-        <hr />
+        <hr/>
     </ul>
     <div class="sui-form form-horizontal sui-validate">
         <div class="control-group">
@@ -47,12 +47,12 @@
             <label class="control-label">图片上传类型：</label>
             <div class="controls">
                 <label data-toggle="radio" class="radio-pretty inline">
-                    <input type="radio" name="product_imgType" id="img_online"
+                    <input type="radio" name="product_imgType"
                            value="1" data-rules="required">
                     <span>图片地址</span>
                 </label>
                 <label data-toggle="radio" class="radio-pretty inline">
-                    <input type="radio" name="product_imgType" id="img_local"
+                    <input type="radio" name="product_imgType"
                            value="2" data-rules="required">
                     <span>本地上传</span>
                 </label>
@@ -68,20 +68,39 @@
             </div>
             <div class="controls">
                 <div class="image_local" style="display: none;">
-                    <input type="text" id="product_image_local" name="product_image_local"
-                           placeholder="图片文件">
-                    <button type="submit" class="sui-btn btn-primary">上传</button>
+                    <div id="imgPreview">
+                        <div id="prompt3">
+                            <span id="imgSpan">
+                                <i class="aui-iconfont aui-icon-plus"></i>
+                            </span>
+                            <input type="file" id="file" class="filepath" onchange="changepic(this)"
+                                   accept="image/jpg,image/jpeg,image/png,image/PNG">
+                        </div>
+                        <img src="#" id="img3"/>
+                    </div>
                 </div>
             </div>
         </div>
         <script>
-            $(function() {
+            function changepic() {
+                $("#prompt3").css("display", "none");
+                var reads = new FileReader();
+                f = document.getElementById('file').files[0];
+                reads.readAsDataURL(f);
+                reads.onload = function (e) {
+                    document.getElementById('img3').src = this.result;
+                    $("#img3").css("display", "block");
+                };
+            }
+        </script>
+        <script>
+            $(function () {
 
                 var imgTypeRadio = $("input:radio[name='product_imgType']");
                 var imgType = $("input:radio[name='product_imgType']:checked").val();
                 var formJson = {};
                 showExpandDiv(imgType);
-                imgTypeRadio.change(function() {
+                imgTypeRadio.change(function () {
                     for (i = 0; i < imgTypeRadio.length; i++) {
                         if (imgTypeRadio[i].checked) {
                             imgType = imgTypeRadio[i].value;
