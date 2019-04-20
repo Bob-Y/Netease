@@ -1,132 +1,151 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<title>内容管理</title>
-	<link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
-	<script type="text/javascript"
-			src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript"
-			src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <title>内容管理</title>
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <script type="text/javascript"
+            src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
 </head>
 <body>
-	<div class="sui-container">
-		<div class="sui-navbar navbar-inverse">
-			<div class="navbar-inner">
-				<ul class="sui-nav">
-					<li><a href="/trading/logout.action">退出</a></li>
-				</ul>
-				<ul class="sui-nav pull-right">
-					<li><a href="/trading/html/seller/sellerProductList">首页</a></li>
-					<li class="active"><a href="#">发布</a></li>
-				</ul>
-			</div>
-		</div>
-		<ul class="sui-breadcrumb">
-			<li><a href="#">内容发布</a></li>
-		</ul>
-		<form class="sui-form form-horizontal sui-validate">
-			<div class="control-group">
-				<label for="product_title" class="control-label">标题：</label>
-				<div class="controls">
-					<input type="text" id="product_title" name="product_title"
-						placeholder="2-80字符" data-rules="required">
-				</div>
-			</div>
-			<div class="control-group">
-				<label for="product_abstract" class="control-label">摘要：</label>
-				<div class="controls">
-					<input type="text" id="product_abstract" name="product_abstract"
-						placeholder="2-140字符" data-rules="required">
-				</div>
-			</div>
-			<div class="control-group">
-				<label for="product_imgType" class="control-label">图片上传类型：</label>
-				<div class="controls">
-					<label data-toggle="radio" class="radio-pretty inline">
-						<input type="radio" name="product_imgType"
-							   value="1" data-rules="required">
-						<span>图片地址</span>
-					</label>
-					<label data-toggle="radio" class="radio-pretty inline">
-						<input type="radio" name="product_imgType"
-							   value="2" data-rules="required">
-						<span>本地上传</span>
-					</label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label for="product_image_address" class="control-label">图片：</label>
-				<div class="controls">
-					<div class="image_address" style="display: none;">
-						<input type="text" id="product_image_address" name="product_image_address"
-							placeholder="图片地址">
-					</div>
-				</div>
-				<div class="controls">
-					<div class="image_local" style="display: none;">
-						<input type="text" id="product_image_local" name="product_image_local"
-							placeholder="图片文件">
-						<button type="submit" class="sui-btn btn-primary">上传</button>
-					</div>
-				</div>
-			</div>
-			<script>
-				$(function() {
+<div class="sui-container">
+    <div class="sui-navbar navbar-inverse">
+        <div class="navbar-inner">
+            <ul class="sui-nav">
+                <li><a href="/trading/logout.action">退出</a></li>
+            </ul>
+            <ul class="sui-nav pull-right">
+                <li><a href="/trading/html/seller/sellerProductList">首页</a></li>
+                <li class="active"><a href="#">发布</a></li>
+            </ul>
+        </div>
+    </div>
+    <ul class="sui-breadcrumb">
+        <li><a href="#">内容发布</a></li>
+    </ul>
+    <form class="sui-form form-horizontal sui-validate" id="product" enctype="multipart/form-data">
+        <div class="control-group">
+            <label for="product_title" class="control-label">标题：</label>
+            <div class="controls">
+                <input type="text" id="product_title" name="product_title"
+                       placeholder="2-80字符" data-rules="required">
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="product_abstract" class="control-label">摘要：</label>
+            <div class="controls">
+                <input type="text" id="product_abstract" name="product_abstract"
+                       placeholder="2-140字符" data-rules="required">
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="product_imgType" class="control-label">图片上传类型：</label>
+            <div class="controls">
+                <label data-toggle="radio" class="radio-pretty inline">
+                    <input type="radio" name="product_imgType"
+                           value="1" data-rules="required">
+                    <span>图片地址</span>
+                </label>
+                <label data-toggle="radio" class="radio-pretty inline">
+                    <input type="radio" name="product_imgType"
+                           value="2" data-rules="required">
+                    <span>本地上传</span>
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="product_image_address" class="control-label">图片：</label>
+            <div class="controls">
+                <div class="image_address" style="display: none;">
+                    <input type="text" id="product_image_address" name="product_image_address"
+                           placeholder="图片地址">
+                </div>
+            </div>
+            <div class="controls">
+                <div class="image_local" style="display: none;">
+                    <div id="imgPreview">
+                        <div id="prompt3">
+                            <span id="imgSpan">
+                                <i class="aui-iconfont aui-icon-plus"></i>
+                            </span>
+                            <input type="file" id="imgFile" name="imgFile" onchange="changepic(this)"
+                                   accept="image/jpg,image/jpeg,image/png,image/PNG">
+                        </div>
+                        <img id="product_image_local"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function changepic() {
+                $("#prompt3").css("display", "none");
+                var reads = new FileReader();
+                f = document.getElementById('imgFile').files[0];
+                reads.readAsDataURL(f);
+                reads.onload = function (e) {
+                    document.getElementById('product_image_local').src = this.result;
+                    $("#product_image_local").css("display", "block");
+                };
+            }
+        </script>
+        <script>
+            $(function () {
 
-					var imgTypeRadio = $("input:radio[name='product_imgType']");
-					var imgType = $("input:radio[name='product_imgType']:checked").val();
-					var formJson = {};
-					showExpandDiv(imgType);
-					imgTypeRadio.change(function() {
-						for (i = 0; i < imgTypeRadio.length; i++) {
-							if (imgTypeRadio[i].checked) {
-								imgType = imgTypeRadio[i].value;
-								showExpandDiv(imgType);
-							}
-						}
-					});
-					//显示对应拓展表单
-					//@param imgType
-					function showExpandDiv(imgType) {
-						//判断
-						if (imgType == 2) {
-							$(".image_local").show();
-							$(".image_address").hide();
+                var imgTypeRadio = $("input:radio[name='product_imgType']");
+                var imgType = $("input:radio[name='product_imgType']:checked").val();
+                var formJson = {};
+                showExpandDiv(imgType);
+                imgTypeRadio.change(function () {
+                    for (i = 0; i < imgTypeRadio.length; i++) {
+                        if (imgTypeRadio[i].checked) {
+                            imgType = imgTypeRadio[i].value;
+                            showExpandDiv(imgType);
+                        }
+                    }
+                });
+                //显示对应拓展表单
+                //@param imgType
+                function showExpandDiv(imgType) {
+                    //判断
+                    if (imgType == 2) {
+                        $(".image_local").show();
+                        $(".image_address").hide();
 
-						} else {
-							$(".image_address").show();
-							$(".image_local").hide();
-						}
-					}
-				});
-			</script>
+                    } else {
+                        $(".image_address").show();
+                        $(".image_local").hide();
+                    }
+                }
+            });
+        </script>
 
-			<div class="control-group">
-				<label for="product_price" class="control-label">价格：</label>
-				<div class="controls">
-					<input type="text" id="product_price" name="product_price" placeholder=""
-						data-rules="required|number"> <label>元</label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label for="product_detail" class="control-label v-top">正文：</label>
-				<div class="controls">
+        <div class="control-group">
+            <label for="product_price" class="control-label">价格：</label>
+            <div class="controls">
+                <input type="text" id="product_price" name="product_price" placeholder=""
+                       data-rules="required|number"> <label>元</label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="product_detail" class="control-label v-top">正文：</label>
+            <div class="controls">
 					<textarea id="product_detail" name="product_detail"
-						placeholder="2-1000个字符" data-rules="required"></textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label"></label>
-				<div class="controls">
-					<button id="submit" class="sui-btn btn-primary">发布</button>
-				</div>
-			</div>
-		</form>
-	</div>
-	<script type='text/javascript'
-			src='/trading/resources/js/productAdd.js' charset='utf-8'></script>
+                              placeholder="2-1000个字符" data-rules="required"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button id="submit" class="sui-btn btn-primary">发布</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type='text/javascript'
+        src='/trading/resources/js/productAdd.js' charset='utf-8'></script>
 </body>
 </html>

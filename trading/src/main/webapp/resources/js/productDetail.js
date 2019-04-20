@@ -10,7 +10,7 @@ $(function () {
 
             $('#product-title').text(product.productTitle);
             $('#product-abstract').text(product.productAbstract);
-            $('#product-price').text(product.productPrice);
+            $('#product-price').text('￥'+product.productPrice);
 
             $('#product-Detail').text(product.productDetail);
         }
