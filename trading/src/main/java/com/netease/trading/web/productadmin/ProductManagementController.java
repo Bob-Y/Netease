@@ -1,10 +1,8 @@
 package com.netease.trading.web.productadmin;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +35,7 @@ public class ProductManagementController {
 
 	@RequestMapping(value = "/addproduct", method = RequestMethod.POST)
 	@ResponseBody
-	private Map<String, Object> addProduct(HttpServletRequest request) {
+	private Map<String, Object> addProduct(MultipartFile imgFile, HttpServletRequest request) {
 		Map<String, Object> modelMap = new HashMap<String, Object>();
 		
 		// 接收前端参数的变量的初始化，包括商品，缩略图，详情图列表实体类
@@ -67,6 +66,27 @@ public class ProductManagementController {
 			modelMap.put("errMsg", e.toString());
 			return modelMap;
 		}
+		String realPath = request.getSession().getServletContext().getRealPath("/");
+		String filePath = realPath+"resources/img/";
+		if(imgFile != null) {
+			String name = imgFile.getOriginalFilename();
+			String suffix = name.substring(name.lastIndexOf("."));
+			String random = UUID.randomUUID().toString();
+			filePath = filePath + random + suffix;
+			try {
+				File file = new File(filePath);
+				if (!file.exists()) {
+					file.createNewFile();
+				}
+				imgFile.transferTo(file);
+			} catch (IOException e) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", e.toString());
+				return modelMap;
+			}
+			product.setProductImgAddr("/trading/resources/img/"+random+suffix);
+		}
+
 		if (product != null ) {
 			try {
 //				// 从session中获取当前seller id

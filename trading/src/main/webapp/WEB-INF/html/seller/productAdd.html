@@ -27,7 +27,7 @@
     <ul class="sui-breadcrumb">
         <li><a href="#">内容发布</a></li>
     </ul>
-    <form class="sui-form form-horizontal sui-validate">
+    <form class="sui-form form-horizontal sui-validate" id="product" enctype="multipart/form-data">
         <div class="control-group">
             <label for="product_title" class="control-label">标题：</label>
             <div class="controls">
@@ -72,7 +72,7 @@
                             <span id="imgSpan">
                                 <i class="aui-iconfont aui-icon-plus"></i>
                             </span>
-                            <input type="file" id="imgFile" onchange="changepic(this)"
+                            <input type="file" id="imgFile" name="imgFile" onchange="changepic(this)"
                                    accept="image/jpg,image/jpeg,image/png,image/PNG">
                         </div>
                         <img id="product_image_local"/>
