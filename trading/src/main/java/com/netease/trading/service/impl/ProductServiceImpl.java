@@ -2,6 +2,8 @@ package com.netease.trading.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,16 +43,13 @@ public class ProductServiceImpl implements ProductService {
 			int detailLength = product.getProductDetail().length();
 			try {
 				if (titleLength < 2 || titleLength > 80) {
-					System.out.println("创建商品失败: productTitle长度不符合规定");
-					throw new ProductOperationException("创建商品失败: productTitle长度不符合规定");
+					throw new ProductOperationException("productTitle长度不符合规定");
 				}
 				else if (abstractLength < 2 || abstractLength > 140) {
-					System.out.println("创建商品失败: productAbstract长度不符合规定");
-					throw new ProductOperationException("创建商品失败: productAbstract长度不符合规定");
+					throw new ProductOperationException("productAbstract长度不符合规定");
 				}
 				else if (detailLength < 2 || detailLength > 1000) {
-					System.out.println("创建商品失败: productDetail长度不符合规定");
-					throw new ProductOperationException("创建商品失败: productDetail长度不符合规定");
+					throw new ProductOperationException("productDetail长度不符合规定");
 				} else {
 					int effectedNum = productDao.insertProduct(product);
 					if (effectedNum <= 0) {
@@ -78,16 +77,13 @@ public class ProductServiceImpl implements ProductService {
 			try {
 				// 更新商品信息
 				if (titleLength < 2 || titleLength > 80) {
-					System.out.println("更新商品失败: productTitle长度不符合规定");
-					throw new ProductOperationException("更新商品失败: productTitle长度不符合规定");
+					throw new ProductOperationException("productTitle长度不符合规定");
 				}
 				else if (abstractLength < 2 || abstractLength > 140) {
-					System.out.println("更新商品失败: productAbstract长度不符合规定");
-					throw new ProductOperationException("更新商品失败: productAbstract长度不符合规定");
+					throw new ProductOperationException("productAbstract长度不符合规定");
 				}
 				else if (detailLength < 2 || detailLength > 1000) {
-					System.out.println("更新商品失败: productDetail长度不符合规定");
-					throw new ProductOperationException("更新商品失败: productDetail长度不符合规定");
+					throw new ProductOperationException("productDetail长度不符合规定");
 				} else {
 					int effectedNum = productDao.updateProduct(product);
 					if (effectedNum <= 0) {

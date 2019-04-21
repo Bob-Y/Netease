@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import com.netease.trading.service.UserService;
 @RequestMapping("/useradmin")
 public class UserController {
 
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Autowired
 	private UserService userService;
 
@@ -30,10 +34,12 @@ public class UserController {
 			list = userService.getUserList();
 			modelMap.put("rows",list);
 			modelMap.put("total",list.size());
+			logger.info("用户列表获取成功，列表长度：{}", list.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			modelMap.put("success", false);
 			modelMap.put("errMsg",e.toString());
+			logger.error("用户列表获取失败");
 		}
 		return modelMap;
 	}

@@ -7,6 +7,8 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,6 +27,8 @@ import com.netease.trading.util.HttpServletRequestUtil;
 @RequestMapping("/productadmin")
 public class ProductManagementController {
 
+	private static final Logger logger = LoggerFactory.getLogger(ProductManagementController.class);
+
 	@Autowired
 	private ProductService productService;
 
@@ -42,6 +46,7 @@ public class ProductManagementController {
 		} catch (Exception e) {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", e.toString());
+			logger.error("获取前端表单转化Product实体失败:{}", e.toString());
 			return modelMap;
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/");
@@ -60,6 +65,7 @@ public class ProductManagementController {
 			} catch (IOException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
+				logger.error("转换本地上传图片文件失败:{}", e.toString());
 				return modelMap;
 			}
 			product.setProductImgAddr("/trading/resources/img/" + random + suffix);
@@ -70,18 +76,22 @@ public class ProductManagementController {
 				ProductExecution pe = productService.addProduct(product);
 				if (pe.getState() == ProductStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
+					logger.info("添加商品成功");
 				} else {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", pe.getStateInfo());
+					logger.error("添加商品失败:{}", pe.getStateInfo());
 				}
 			} catch (ProductOperationException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
+				logger.error("添加商品失败:{}", e.toString());
 				return modelMap;
 			}
 		} else {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "请输入商品信息");
+			logger.error("添加商品信息为空");
 		}
 		return modelMap;
 	}
@@ -100,6 +110,7 @@ public class ProductManagementController {
 		} catch (Exception e) {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", e.toString());
+			logger.error("获取前端表单转化Product实体失败:{}", e.toString());
 			return modelMap;
 		}
 		String realPath = request.getSession().getServletContext().getRealPath("/");
@@ -118,6 +129,7 @@ public class ProductManagementController {
 			} catch (IOException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
+				logger.error("转换本地上传图片文件失败:{}", e.toString());
 				return modelMap;
 			}
 			newProduct.setProductImgAddr("/trading/resources/img/" + random + suffix);
@@ -128,18 +140,22 @@ public class ProductManagementController {
 				ProductExecution pe = productService.modifyProduct(newProduct);
 				if (pe.getState() == ProductStateEnum.SUCCESS.getState()) {
 					modelMap.put("success", true);
+					logger.info("修改商品id={}成功", id);
 				} else {
 					modelMap.put("success", false);
 					modelMap.put("errMsg", pe.getStateInfo());
+					logger.error("修改商品id={}失败:{}", id, pe.getStateInfo());
 				}
 			} catch (ProductOperationException e) {
 				modelMap.put("success", false);
 				modelMap.put("errMsg", e.toString());
+				logger.error("修改商品id={}失败:{}", id, e.toString());
 				return modelMap;
 			}
 		} else {
 			modelMap.put("success", false);
 			modelMap.put("errMsg", "请输入商品信息");
+			logger.error("修改商品信息为空");
 		}
 		return modelMap;
 	}
@@ -153,6 +169,7 @@ public class ProductManagementController {
 		modelMap.put("productList", pe.getProductList());
 		modelMap.put("count", pe.getCount());
 		modelMap.put("success", true);
+		logger.info("获取全部商品列表成功");
 		return modelMap;
 	}
 

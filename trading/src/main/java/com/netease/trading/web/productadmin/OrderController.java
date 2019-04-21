@@ -4,6 +4,8 @@ import com.netease.trading.dao.*;
 import com.netease.trading.dto.CartItemDto;
 import com.netease.trading.dto.UserProduct;
 import com.netease.trading.entity.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 public class OrderController {
+
+    private static final Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private ProductDao productDao;
@@ -38,9 +42,11 @@ public class OrderController {
         if (null != byId) {
             result.put("success", true);
             result.put("product", byId);
+            logger.info("获取商品id={}成功", byId.getProductId());
         } else {
             result.put("success", false);
             result.put("errorMsg", "no such product");
+            logger.info("未查询到该商品信息");
         }
         return result;
     }
@@ -53,9 +59,11 @@ public class OrderController {
         if (null != byId) {
             result.put("success", true);
             result.put("product", byId);
+            logger.info("获取用户商品id={}成功", byId.getProductId());
         } else {
             result.put("success", false);
             result.put("errorMsg", "no such product");
+            logger.info("未查询到该用户商品信息");
         }
         return result;
     }
@@ -71,6 +79,7 @@ public class OrderController {
         List<UserProduct> userProducts = productDao.queryUserProduct(id);
         result.put("success", true);
         result.put("productList",userProducts);
+        logger.info("获取用户id={}全部商品信息成功", id);
         return result;
     }
 
@@ -80,6 +89,7 @@ public class OrderController {
         List<Product> products = productDao.queryUnBought(id);
         result.put("success", true);
         result.put("productList", products);
+        logger.info("获取用户id={}全部未购买商品信息成功", id);
         return result;
     }
 
@@ -94,6 +104,7 @@ public class OrderController {
         modelMap.put("success", true);
         modelMap.put("bill", orders);
         modelMap.put("price", total_price);
+        logger.info("获取用户id={}全部订单信息成功", id);
         return modelMap;
     }
 
@@ -109,18 +120,21 @@ public class OrderController {
         shoppingCartDao.delCart(userId);
         ModelMap modelMap = new ModelMap();
         modelMap.put("success", true);
+        logger.info("用户id={}订单提交成功", userId);
         return modelMap;
     }
 
     @GetMapping("/del/{id}")
     public ModelMap del(@PathVariable Integer id) {
-        int result = productDao.deleteProduct(id);
         ModelMap modelMap = new ModelMap();
+        int result = productDao.deleteProduct(id);
         if (result < 0) {
             modelMap.put("success", false);
+            logger.info("商品id={}删除失败", id);
         } else {
             cartItemDao.delCartByProductId(id);
             modelMap.put("success", true);
+            logger.info("商品id={}删除成功", id);
         }
         return modelMap;
     }
@@ -153,6 +167,7 @@ public class OrderController {
             cartItemDao.insertCartItem(newOne);
         }
         modelMap.put("success", true);
+        logger.info("商品id={}加入购物车成功", item.getProductId());
         return modelMap;
     }
 
@@ -163,6 +178,7 @@ public class OrderController {
         List<CartItemDto> cart = shoppingCartDao.getCart(userId);
         result.put("success", true);
         result.put("cart", 	cart);
+        logger.info("获取用户id={}购物车信息成功", userId);
         return result;
     }
 
@@ -172,6 +188,7 @@ public class OrderController {
         Double orderPrice = orderDao.queryPriceByProduct(id);
         result.put("success", true);
         result.put("price", orderPrice);
+        logger.info("查询商品id={}购买时价格为{}成功", id, orderPrice);
         return result;
     }
 
