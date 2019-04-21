@@ -1,7 +1,6 @@
 package com.netease.trading.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,4 +16,5 @@ public class ViewController {
         String result = requestURI.substring(index);
         return result;
     }
+
 }

@@ -5,67 +5,60 @@
 <mapper namespace="com.netease.trading.dao.ProductDao">
 	<insert id="insertProduct" useGeneratedKeys="true"
 		keyColumn="product_id" keyProperty="productId">
-		INSERT INTO product(product_title,product_abstract,product_detail,
-		product_price,product_status,product_imgAddr,product_imgType,product_user_id)
-		VALUES(#{productTitle},#{productAbstract},#{productDetail},#{productPrice},#{productStatus},
-		#{productImgAddr},#{productImgType},#{productUser.userId})
+		INSERT INTO product(product_title, product_abstract, product_detail,
+		product_price, product_status, product_imgAddr, product_imgType, product_user_id)
+		VALUES(#{productTitle}, #{productAbstract}, #{productDetail}, #{productPrice}, #{productStatus},
+		#{productImgAddr}, #{productImgType}, #{productUser.userId})
 	</insert>
 	<update id="updateProduct" parameterType="com.netease.trading.entity.Product">
-	update product
+		UPDATE product
 		<set>
-		<if test="productTitle != null">product_title=#{productTitle},</if>
-		<if test="productAbstract != null">product_abstract=#{productAbstract},</if>
-		<if test="productDetail != null">product_detail=#{productDetail},</if>
-		<if test="productPrice != null">product_price=#{productPrice},</if>
-		<if test="productStatus != null">product_status=#{productStatus},</if>  
-		<if test="productImgAddr != null">product_imgAddr=#{productImgAddr},</if>
-		<if test="productImgType != null">product_imgType=#{productImgType},</if>
-		<if test="productUser != null">product_user_id=#{productUser.userId}</if>
+			<if test="productTitle != null">product_title = #{productTitle},</if>
+			<if test="productAbstract != null">product_abstract = #{productAbstract},</if>
+			<if test="productDetail != null">product_detail = #{productDetail},</if>
+			<if test="productPrice != null">product_price = #{productPrice},</if>
+			<if test="productStatus != null">product_status = #{productStatus},</if>
+			<if test="productImgAddr != null">product_imgAddr = #{productImgAddr},</if>
+			<if test="productImgType != null">product_imgType = #{productImgType},</if>
+			<if test="productUser != null">product_user_id = #{productUser.userId}</if>
 		</set>
-		where product_id=#{productId}
+		WHERE product_id = #{productId}
 	</update>
 	<select id="queryProduct" resultType="com.netease.trading.entity.Product">
-		SELECT product_id, product_title,product_abstract,product_detail,
-		product_price,product_status,product_imgAddr,product_imgType,product_user_id
+		SELECT product_id, product_title, product_abstract, product_detail,
+		product_price, product_status, product_imgAddr, product_imgType, product_user_id
 		FROM product
 	</select>
-
 	<select id="findById" resultType="com.netease.trading.entity.Product">
-		SELECT product_id, product_title,product_abstract,product_detail,
-		product_price,product_status,product_imgAddr,product_imgType,product_user_id
+		SELECT product_id, product_title, product_abstract, product_detail,
+		product_price, product_status, product_imgAddr, product_imgType, product_user_id
 		FROM product
 		WHERE product_id = #{pid}
 	</select>
-
 	<select id="findUserProductById" resultType="com.netease.trading.dto.UserProduct">
 		SELECT p.*,
-		p.`product_id` in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = 2) as hasBought
+		p.`product_id` IN (SELECT DISTINCT(`order_product`) FROM `ordertable` WHERE `order_user_id` = 2) AS hasBought
 		FROM product p
 		WHERE p.product_id = #{pid}
 	</select>
-
 	<select id="findBoughtById" resultType="com.netease.trading.entity.Product">
-		SELECT p.product_id, p.product_title,p.product_abstract,p.product_detail,
-		o.order_price as product_price
+		SELECT p.product_id, p.product_title, p.product_abstract, p.product_detail,
+		o.order_price AS product_price
 		FROM product p, `ordertable` o
-		WHERE p.product_id = o.order_product and p.product_id = #{pid}
+		WHERE p.product_id = o.order_product AND p.product_id = #{pid}
 	</select>
-
 	<select id="queryUserProduct" resultType="com.netease.trading.dto.UserProduct" >
-		select p.*,
-		p.`product_id` in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = #{uid}) as hasBought
-		from product p
+		SELECT p.*,
+		p.`product_id` IN (SELECT DISTINCT(`order_product`) FROM `ordertable` WHERE `order_user_id` = #{uid}) AS hasBought
+		FROM product p
 	</select>
-
 	<select id="queryUnBought" resultType="Product">
-		select p.*
-		from product p
-		where p.`product_id` not in (select DISTINCT(`order_product`) from `ordertable` where `order_user_id` = #{uid})
+		SELECT p.*
+		FROM product p
+		WHERE p.`product_id` NOT IN (SELECT DISTINCT(`order_product`) FROM `ordertable` WHERE `order_user_id` = #{uid})
 	</select>
-
 	<delete id="deleteProduct">
 		DELETE FROM product
 		WHERE product_id = #{pid}
 	</delete>
-
 </mapper>

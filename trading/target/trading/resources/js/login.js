@@ -1,10 +1,10 @@
 $(function() {
-    // 登录验证的controller url
+    // 登录验证的controller的url
     var loginUrl = baseUrl+'login.action';
     // 用户类型，通过登录验证返回，买家为 1
     var usertype = getQueryString('usertype');
 
-    String.prototype.MD5 = function (bit)
+    String.prototype.MD5 = function(bit)
     {
         var sMessage = this;
         function RotateLeft(lValue, iShiftBits) { return (lValue<<iShiftBits) | (lValue>>>(32-iShiftBits)); }
@@ -170,14 +170,11 @@ $(function() {
         {
             return WordToHex(b)+WordToHex(c);
         }
-    }
-
+    };
     $('#submit').click(function() {
         var userName = $('#username').val();
         var password = $('#psw').val();
-
         var encoded = password.MD5(32);
-
         // 访问后台进行登录验证
         $.ajax({
             url : loginUrl,

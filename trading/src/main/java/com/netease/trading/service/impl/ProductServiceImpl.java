@@ -2,8 +2,6 @@ package com.netease.trading.service.impl;
 
 import java.util.List;
 
-import com.netease.trading.dao.OrderDao;
-import com.netease.trading.dto.CartItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +15,7 @@ import com.netease.trading.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
 	@Autowired
 	private ProductDao productDao;
 
@@ -105,4 +104,3 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 }
-

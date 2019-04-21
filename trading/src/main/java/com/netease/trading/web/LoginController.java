@@ -1,10 +1,7 @@
 package com.netease.trading.web;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netease.trading.dto.LoginDto;
 import com.netease.trading.service.UserService;
-import com.netease.trading.util.HttpServletRequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,9 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -30,7 +24,7 @@ public class LoginController {
     private ModelMap login(@RequestBody LoginDto loginDto, HttpServletRequest request) {
         ModelMap modelMap = new ModelMap();
         int validate = userService.validate(loginDto.getUser(), loginDto.getPass());
-        if(validate < 0) {
+        if (validate < 0) {
             modelMap.put("success", false);
             modelMap.put("errMsg", "wrong user or password");
         } else {

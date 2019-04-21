@@ -1,5 +1,5 @@
 $(function() {
-	// 获取productlist URL
+	// 获取productlist的url
 	// var initUrl = '/trading/productadmin/getproductlist';
     var initUrl = '/trading/product/2/all';
 	getlist();
@@ -59,5 +59,4 @@ $(function() {
 		});
 		$('#products_list').html(html);
 	}
-
 });

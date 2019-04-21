@@ -2,9 +2,16 @@ package com.netease.trading.dto;
 
 public class CartItemDto {
 
+    // 商品数量
     private int productId;
+
+    // 商品名称
     private String productName;
+
+    // 数量
     private int count;
+
+    // 价格
     private double price;
 
     public int getProductId() {

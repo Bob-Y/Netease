@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -21,14 +22,14 @@ public class LoginFilter implements Filter {
         // 获得用户请求的URI
         String path = servletRequest.getRequestURI();
         System.out.println("in Filter: "+path);
-        // 从session里获取用户名
+        //从session里获取用户名
         String userName = (String) session.getAttribute("user");
         // 登陆页面无需过滤
-        if(path.contains("/login") || path.contains("/logout")) {
+        if (path.contains("/login") || path.contains("/logout")) {
             chain.doFilter(servletRequest, servletResponse);
         }
         // 判断如果没有获取用户名,就跳转到登陆页面
-        if(userName == null || "".equals(userName)) {
+        if (userName == null || "".equals(userName)) {
             // 跳转到登陆页面
             servletResponse.sendRedirect("/trading/html/login");
         } else {
@@ -41,4 +42,5 @@ public class LoginFilter implements Filter {
     public void destroy() {
 
     }
+
 }

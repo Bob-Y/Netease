@@ -5,31 +5,29 @@
 <mapper namespace="com.netease.trading.dao.OrderDao">
 	<insert id="insertOrder" useGeneratedKeys="true"
 		keyColumn="order_id" keyProperty="orderId">
-		INSERT INTO orderTable(order_time,order_product,order_quantity, order_price,order_user_id)
-		VALUES(now(),#{orderProduct.productId},#{orderQuantity},#{orderPrice},#{orderUser.userId})
+		INSERT INTO orderTable(order_time, order_product, order_quantity, order_price, order_user_id)
+		VALUES(now(), #{orderProduct.productId}, #{orderQuantity}, #{orderPrice}, #{orderUser.userId})
 	</insert>
-
 	<insert id="addOrder">
-		INSERT INTO orderTable(order_time,order_product,order_quantity, order_price,order_user_id)
-		VALUES(now(),#{item.productId},#{item.count},#{item.price},#{uid})
+		INSERT INTO orderTable(order_time, order_product, order_quantity, order_price, order_user_id)
+		VALUES(now(), #{item.productId}, #{item.count}, #{item.price}, #{uid})
 	</insert>
-
 	<update id="updateOrder" parameterType="com.netease.trading.entity.Order">
-	update orderTable
+		UPDATE orderTable
 		<set>
-		<if test="orderTime != null">order_time=#{orderTime},</if>
-		<if test="orderProduct != null">order_product=#{orderProduct.productId},</if>
-		<if test="orderQuantity != null">order_quantity=#{orderQuantity},</if>
-		<if test="orderPrice != null">order_price=#{orderPrice},</if>
-		<if test="orderUser != null">order_user_id=#{orderUser.userId}</if>  
+			<if test="orderTime != null">order_time = #{orderTime},</if>
+			<if test="orderProduct != null">order_product = #{orderProduct.productId},</if>
+			<if test="orderQuantity != null">order_quantity = #{orderQuantity},</if>
+			<if test="orderPrice != null">order_price = #{orderPrice},</if>
+			<if test="orderUser != null">order_user_id = #{orderUser.userId}</if>
 		</set>
-		where order_id=#{orderId}
+		WHERE order_id = #{orderId}
 	</update>
 	<select id="queryUserOrder" resultType="com.netease.trading.entity.Order" parameterType="Integer">
-		SELECT o.order_id, o.order_time, p.product_id as 'order_product.product_id', p.product_title as 'order_product.product_title', p.product_imgAddr as 'order_product.product_imgAddr',
+		SELECT o.order_id, o.order_time, p.product_id AS 'order_product.product_id', p.product_title AS 'order_product.product_title', p.product_imgAddr AS 'order_product.product_imgAddr',
 		o.order_quantity, o.order_price
 		FROM orderTable o, product p
-		WHERE o.order_product = p.product_id and o.order_user_id = #{userId}
+		WHERE o.order_product = p.product_id AND o.order_user_id = #{userId}
 	</select>
 	<select id="queryPriceByProduct" resultType="java.lang.Double" parameterType="Long">
 		SELECT order_price

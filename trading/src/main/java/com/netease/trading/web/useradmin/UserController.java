@@ -17,6 +17,7 @@ import com.netease.trading.service.UserService;
 @Controller
 @RequestMapping("/useradmin")
 public class UserController {
+
 	@Autowired
 	private UserService userService;
 
@@ -29,12 +30,12 @@ public class UserController {
 			list = userService.getUserList();
 			modelMap.put("rows",list);
 			modelMap.put("total",list.size());
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			modelMap.put("success", false);
 			modelMap.put("errMsg",e.toString());
 		}
-	
 		return modelMap;
 	}
+
 }

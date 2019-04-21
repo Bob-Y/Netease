@@ -8,14 +8,12 @@
 		user_type, user_password
 		FROM user
 	</select>
-
 	<select id="findUser" resultType="com.netease.trading.entity.User">
 		SELECT user_id, user_name,
 		user_type, user_password
 		FROM user
 		WHERE user_name = #{username}
 	</select>
-
 	<select id="findById" resultType="com.netease.trading.entity.User">
 		SELECT user_id, user_name,
 		user_type, user_password

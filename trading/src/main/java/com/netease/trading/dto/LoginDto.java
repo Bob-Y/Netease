@@ -2,8 +2,10 @@ package com.netease.trading.dto;
 
 public class LoginDto {
 
+    // 用户名
     private String user;
 
+    // 密码
     private String pass;
 
     public String getUser() {

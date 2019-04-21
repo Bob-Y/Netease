@@ -9,21 +9,24 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/product")
 public class OrderController {
+
     @Autowired
     private ProductDao productDao;
+
     @Autowired
     private OrderDao orderDao;
+
     @Autowired
     private UserDao userDao;
+
     @Autowired
     private CartItemDao cartItemDao;
+
     @Autowired
     private ShoppingCartDao shoppingCartDao;
 
@@ -32,14 +35,14 @@ public class OrderController {
         System.out.println("get single product");
         Product byId = productDao.findById(id);
         ModelMap result = new ModelMap();
-        if(null != byId) {
+        if (null != byId) {
             result.put("success", true);
             result.put("product", byId);
         } else {
             result.put("success", false);
             result.put("errorMsg", "no such product");
         }
-        return  result;
+        return result;
     }
 
     @GetMapping("/userproduct/{id}")
@@ -47,14 +50,14 @@ public class OrderController {
         System.out.println("get single product");
         UserProduct byId = productDao.findUserProductById(id);
         ModelMap result = new ModelMap();
-        if(null != byId) {
+        if (null != byId) {
             result.put("success", true);
             result.put("product", byId);
         } else {
             result.put("success", false);
             result.put("errorMsg", "no such product");
         }
-        return  result;
+        return result;
     }
 
     @GetMapping("/user/{id}")
@@ -62,7 +65,7 @@ public class OrderController {
         return productDao.findBoughtById(id);
     }
 
-    @GetMapping("/{id}/all") // /trading/product/1/all
+    @GetMapping("/{id}/all")
     public ModelMap all(@PathVariable Integer id) {
         ModelMap result = new ModelMap();
         List<UserProduct> userProducts = productDao.queryUserProduct(id);
@@ -99,7 +102,7 @@ public class OrderController {
         List<CartItemDto> cart = shoppingCartDao.getCart(userId);
         User user = userDao.findById(userId);
         Integer cart_id = shoppingCartDao.query(userId);
-        for(CartItemDto item: cart) {
+        for (CartItemDto item : cart) {
             int result = orderDao.addOrder(item, user.getUserId());
         }
         cartItemDao.delCart(cart_id);
@@ -112,7 +115,6 @@ public class OrderController {
     @GetMapping("/del/{id}")
     public ModelMap del(@PathVariable Integer id) {
         int result = productDao.deleteProduct(id);
-
         ModelMap modelMap = new ModelMap();
         if (result < 0) {
             modelMap.put("success", false);
@@ -127,15 +129,14 @@ public class OrderController {
     @ResponseBody
     private ModelMap addToCart(@RequestBody CartItemDto item, @PathVariable Integer userId, HttpServletRequest request) {
         ModelMap modelMap = new ModelMap();
-
         CartItem cartItem = cartItemDao.query(item.getProductId());
-        if(null != cartItem) {
+        if (null != cartItem) {
             int newCount = cartItem.getCartItemQuantity() + item.getCount();
             cartItem.setCartItemQuantity(newCount);
             cartItemDao.updateCartItem(cartItem);
         } else {
             Integer cartId = shoppingCartDao.query(userId);
-            if(cartId == null) {
+            if (cartId == null) {
                 ShoppingCart cart = new ShoppingCart();
                 User user = new User();
                 user.setUserId(Long.valueOf(userId));
@@ -153,7 +154,6 @@ public class OrderController {
         }
         modelMap.put("success", true);
         return modelMap;
-
     }
 
     @RequestMapping(value = "/getCart/{userId}", method = RequestMethod.GET)
@@ -164,7 +164,6 @@ public class OrderController {
         result.put("success", true);
         result.put("cart", 	cart);
         return result;
-
     }
 
     @GetMapping("/price/{id}")
@@ -175,6 +174,5 @@ public class OrderController {
         result.put("price", orderPrice);
         return result;
     }
-
 
 }

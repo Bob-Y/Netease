@@ -24,11 +24,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int validate(String username, String pass) {
 		User user = userDao.findUser(username);
-		if(null == user) {
+		if (null == user) {
 			return -1;
 		}
 		String oPass = MD5Util.getMD5(user.getUserPassword());
-		if(oPass.equals(pass)) {
+		if (oPass.equals(pass)) {
 			return user.getUserType();
 		}
 		return -1;

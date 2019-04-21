@@ -1,15 +1,15 @@
-$(function () {
-    //从地址栏的url中获取商品id
+$(function() {
+    // 从地址栏的url中获取商品id
     var productId = getQueryString('id');
-    //获取商品信息的url
+    // 获取商品信息的url
     var userProductUrl = baseUrl + 'product/userproduct/' + productId;
     $.getJSON(userProductUrl, function(data) {
         if (data.success) {
             var userProduct = data.product;
-            $('#product-img').attr('src',userProduct.productImgAddr);
+            $('#product-img').attr('src', userProduct.productImgAddr);
             $('#product-title').text(userProduct.productTitle);
             $('#product-abstract').text(userProduct.productAbstract);
-            $('#product-price').text(userProduct.productPrice);
+            $('#product-price').text('￥' + userProduct.productPrice);
             $('#product-detail').text(userProduct.productDetail);
             var html = '';
             if(userProduct.hasBought) {
@@ -20,7 +20,6 @@ $(function () {
             $('#user-button').html(html);
             $('#add-to-cart').click(function() {
                 var cartItemDto = {};
-                // 获取表单里的数据并填充进对应的店铺属性中
                 cartItemDto.productId = productId;
                 cartItemDto.productName = $('#product_title').val();
                 cartItemDto.count = $('#count').val();
@@ -41,7 +40,6 @@ $(function () {
                         }
                     }
                 });
-
             });
         }
     });
@@ -51,5 +49,4 @@ $(function () {
             $('#order-price').text(data.price);
         }
     });
-
 });

@@ -1,5 +1,5 @@
 $(function() {
-	// 获取productlist URL
+	// 获取productlist的url
 	var allProductUrl = '/trading/productadmin/getproductlist';
 	var unBoughtProductUrl = '/trading/product/2/unBought';
 	var initUrl = allProductUrl;

@@ -3,7 +3,11 @@ package com.netease.trading.entity;
 
 public class ShoppingCart {
 	
+	// 购物车id
 	private Long shoppingCartID;
+
+	// 购物车所属用户
+	private User shoppingCartUser;
 
 	public Long getShoppingCartID() {
 		return shoppingCartID;
@@ -12,8 +16,6 @@ public class ShoppingCart {
 	public void setShoppingCartID(Long shoppingCartID) {
 		this.shoppingCartID = shoppingCartID;
 	}
-
-	private User shoppingCartUser;
 
 	public User getShoppingCartUser() {
 		return shoppingCartUser;

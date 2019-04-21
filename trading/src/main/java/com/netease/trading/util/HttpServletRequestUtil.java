@@ -3,6 +3,7 @@ package com.netease.trading.util;
 import javax.servlet.http.HttpServletRequest;
 
 public class HttpServletRequestUtil {
+
 	public static int getInt(HttpServletRequest request, String key) {
 		try {
 			return Integer.decode(request.getParameter(key));
@@ -49,4 +50,5 @@ public class HttpServletRequestUtil {
 			return null;
 		}
 	}
+
 }

@@ -1,5 +1,5 @@
 $(function() {
-    // 获取orderlist URL
+    // 获取orderlist的url
     var initUrl = '/trading/product/2/bill';
     getlist();
     function getlist() {
