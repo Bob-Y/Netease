@@ -1,5 +1,6 @@
 com\netease\trading\service\impl\UserServiceImpl.class
 com\netease\trading\dto\LoginDto.class
+com\netease\trading\web\LoginFilter.class
 com\netease\trading\entity\Product.class
 com\netease\trading\enums\ProductStateEnum.class
 com\netease\trading\dto\UserProduct.class
@@ -12,15 +13,11 @@ com\netease\trading\dao\ShoppingCartDao.class
 com\netease\trading\web\useradmin\UserController.class
 com\netease\trading\dao\CartItemDao.class
 com\netease\trading\entity\User.class
-com\netease\trading\web\productadmin\ProductController.class
 com\netease\trading\dao\UserDao.class
 com\netease\trading\web\productadmin\OrderController.class
 com\netease\trading\exceptions\ProductOperationException.class
 com\netease\trading\util\MD5Util.class
 com\netease\trading\dao\ProductDao.class
-com\netease\trading\dto\BillItem.class
-com\netease\trading\dto\ProductDto.class
-com\netease\trading\util\PathUtil.class
 com\netease\trading\web\productadmin\ProductManagementController.class
 com\netease\trading\util\UserAuth.class
 com\netease\trading\dto\CartItemDto.class
