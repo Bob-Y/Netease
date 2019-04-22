@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,8 +54,9 @@ public class ProductManagementController {
 			String suffix = name.substring(name.lastIndexOf("."));
 			String random = UUID.randomUUID().toString();
 			filePath = filePath + random + suffix;
+			File file = null;
 			try {
-				File file = new File(filePath);
+				file = new File(filePath);
 				if (!file.exists()) {
 					file.createNewFile();
 				}
@@ -68,9 +67,16 @@ public class ProductManagementController {
 				logger.error("转换本地上传图片文件失败:{}", e.toString());
 				return modelMap;
 			}
+			double fileSizeMB = file.length() / (1024*1024);
+			if (fileSizeMB >= 1) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "图片文件大小超过1MB");
+				logger.error("图片文件大小超过1MB");
+				return modelMap;
+			}
 			product.setProductImgAddr("/trading/resources/img/" + random + suffix);
 		}
-		if (product != null ) {
+		if (product != null) {
 			try {
 				// 执行添加操作
 				ProductExecution pe = productService.addProduct(product);
@@ -120,8 +126,9 @@ public class ProductManagementController {
 			String suffix = name.substring(name.lastIndexOf("."));
 			String random = UUID.randomUUID().toString();
 			filePath = filePath + random + suffix;
+			File file = null;
 			try {
-				File file = new File(filePath);
+				file = new File(filePath);
 				if (!file.exists()) {
 					file.createNewFile();
 				}
@@ -132,9 +139,16 @@ public class ProductManagementController {
 				logger.error("转换本地上传图片文件失败:{}", e.toString());
 				return modelMap;
 			}
+			double fileSizeMB = file.length() / (1024*1024);
+			if (fileSizeMB >= 1) {
+				modelMap.put("success", false);
+				modelMap.put("errMsg", "图片文件大小超过1MB");
+				logger.error("图片文件大小超过1MB");
+				return modelMap;
+			}
 			newProduct.setProductImgAddr("/trading/resources/img/" + random + suffix);
 		}
-		if (newProduct != null ) {
+		if (newProduct != null) {
 			try {
 				// 执行修改操作
 				ProductExecution pe = productService.modifyProduct(newProduct);

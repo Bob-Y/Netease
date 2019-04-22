@@ -26,11 +26,7 @@ CREATE TABLE `cartitem` (
   `cartItem_product_id` INT(11) DEFAULT NULL,
   `cartItem_quantity` INT(10) DEFAULT NULL,
   `cart_id` INT(10) NOT NULL,
-  PRIMARY KEY (`cartItem_id`),
-  KEY `cartItem_product` (`cartItem_product_id`),
-  KEY `cartItem_cart` (`cart_id`),
-  CONSTRAINT `cartItem_product` FOREIGN KEY (`cartItem_product_id`) REFERENCES `product` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `cartItem_cart` FOREIGN KEY (`cart_id`) REFERENCES `shoppingcart` (`shoppingCart_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`cartItem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `cartitem` */
@@ -46,11 +42,7 @@ CREATE TABLE `ordertable` (
   `order_quantity` INT(11) DEFAULT NULL,
   `order_price` DOUBLE DEFAULT NULL,
   `order_user_id` INT(11) DEFAULT NULL,
-  PRIMARY KEY (`order_id`),
-  KEY `order_user` (`order_user_id`),
-  KEY `order_product` (`order_product`),
-  CONSTRAINT `order_product` FOREIGN KEY (`order_product`) REFERENCES `product` (`product_id`),
-  CONSTRAINT `order_user` FOREIGN KEY (`order_user_id`) REFERENCES `user` (`user_id`)
+  PRIMARY KEY (`order_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `ordertable` */
@@ -70,9 +62,7 @@ CREATE TABLE `product` (
   `product_imgAddr` VARCHAR(2000) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `product_user_id` INT(10) DEFAULT NULL COMMENT 'seller',
   `product_imgType` INT(11) DEFAULT NULL COMMENT 'product image address type',
-  PRIMARY KEY (`product_id`),
-  KEY `product_user` (`product_user_id`),
-  CONSTRAINT `product_user` FOREIGN KEY (`product_user_id`) REFERENCES `user` (`user_id`)
+  PRIMARY KEY (`product_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `product` */
@@ -86,9 +76,7 @@ DROP TABLE IF EXISTS `shoppingcart`;
 CREATE TABLE `shoppingcart` (
   `shoppingCart_id` INT(10) NOT NULL AUTO_INCREMENT,
   `shoppingCart_user_id` INT(10) DEFAULT NULL,
-  PRIMARY KEY (`shoppingCart_id`),
-  KEY `shoppingCart_user` (`shoppingCart_user_id`),
-  CONSTRAINT `shoppingCart_user` FOREIGN KEY (`shoppingCart_user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (`shoppingCart_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `shoppingcart` */
